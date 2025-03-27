@@ -37,7 +37,7 @@ void	push(int *src, int *src_size, int *dest, int *dest_size)
 	}
 	dest[0] = src[0];
 	i = 0;
-	while (i > *src_size - 1)
+	while (i < *src_size - 1)
 	{
 		src[i] = src[i + 1];
 		i++;

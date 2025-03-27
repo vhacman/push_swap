@@ -28,15 +28,25 @@ t_stack_node	*create_stack_node(int value)
 void	create_stack(t_stack_node **stack, int value)
 {
 	t_stack_node	*new_node;
+	t_stack_node	*temp;
 
 	new_node = malloc(sizeof(t_stack_node));
 	if (!new_node)
-		return ;
+		exit_error();
 	new_node->value = value;
-	new_node->index = -1;
-	new_node->next = *stack;
-	*stack = new_node;
+	new_node->next = NULL;
+
+	if (!*stack)
+	{
+		*stack = new_node;
+		return;
+	}
+	temp = *stack;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new_node;
 }
+
 
 
 int	stack_size(t_stack_node *stack)

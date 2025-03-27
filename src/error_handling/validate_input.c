@@ -12,15 +12,33 @@
 
 #include "push_swap.h"
 
+
+static void	free_split(char **split)
+{
+	int	i;
+
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 static int	is_number(char *str)
 {
 	int	i;
 
-	i = 0;
 	if (!str || !str[0])
 		return (0);
+	i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
+	if (!str[i]) // es: "+" o "-" da soli
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -49,20 +67,31 @@ void	exit_error(void)
 
 void	validate_input(char **av, int ac, t_stack_node **stack)
 {
-	int		i;
+	int		i, j;
+	char	**tokens;
 	long	num;
 
 	i = 1;
 	while (i < ac)
 	{
-		if (!is_number(av[i]))
+		tokens = ft_split(av[i], ' ');
+		if (!tokens)
 			exit_error();
-		num = ft_atol(av[i]);
-		if (num > INT_MAX || num < INT_MIN)
-			exit_error();
-		if (has_duplicates(*stack, (int)num))
-			exit_error();
-		create_stack(stack, (int)num);
+		j = 0;
+		while (tokens[j])
+		{
+			if (!is_number(tokens[j]))
+				exit_error();
+			num = ft_atol(tokens[j]);
+			if (num > INT_MAX || num < INT_MIN)
+				exit_error();
+			if (has_duplicates(*stack, (int)num))
+				exit_error();
+			create_stack(stack, (int)num);
+			j++;
+		}
+		free_split(tokens); // libera ogni stringa e poi l'array
 		i++;
 	}
 }
+
