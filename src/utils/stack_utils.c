@@ -25,16 +25,19 @@ t_stack_node	*create_stack_node(int value)
 	return (node);
 }
 
-void	*create_stack(t_stack_node **stack, int value)
+void	create_stack(t_stack_node **stack, int value)
 {
 	t_stack_node	*new_node;
 
-	new_node = create_stack_node(value);
+	new_node = malloc(sizeof(t_stack_node));
 	if (!new_node)
-		return (NULL);
-	ft_lstadd_front((t_list **)stack, (t_list *)new_node);
-	return (NULL);
+		return ;
+	new_node->value = value;
+	new_node->index = -1;
+	new_node->next = *stack;
+	*stack = new_node;
 }
+
 
 int	stack_size(t_stack_node *stack)
 {

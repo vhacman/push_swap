@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdio.h>
 
 typedef struct s_stack_node
 {
@@ -54,11 +55,12 @@ typedef struct	s_target_info
 	t_cost			cost;
 }	t_target_info;
 
+
 //STACK_UTILS --> stack_utils.c f
 void			free_stack(t_stack_node *stack);
 int				*convert_stack_to_array(t_stack_node *stack, int stack_size);
 int				stack_size(t_stack_node *stack);
-void			*create_stack(t_stack_node **stack, int value);
+void			create_stack(t_stack_node **stack, int value);
 t_stack_node	*create_stack_node(int value);
 int				is_sorted_and_empty(t_stack_node *stack_a, t_stack_node *stack_b);
 void			assign_indices(t_stack_node *stack, int *sorted_array, int size);

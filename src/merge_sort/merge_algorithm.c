@@ -48,15 +48,15 @@ static void	merge_arrays(int *array, int *arr_temp, t_range_limits limits)
 ** 'left' and 'right'. This reflects the sorted order permanently in
 ** the original input.
 */
-static void	copy_arr_arr_temp_to_array(int *array, int *arr_arr_temp,
-										int left, int right)
+static void	copy_temp_to_array(int *array, int *arr_temp,
+										t_range_limits limits)
 {
 	int	i;
 
-	i = left;
-	while (i <= right)
+	i = limits.left;
+	while (i <= limits.right)
 	{
-		array[i] = arr_arr_temp[i];
+		array[i] = arr_temp[i];
 		i++;
 	}
 }
@@ -68,21 +68,29 @@ static void	copy_arr_arr_temp_to_array(int *array, int *arr_arr_temp,
 ** then merges the sorted halves into a temporary array.
 ** Finally, it copies the result back into the original array.
 */
-static void	merge_sort_recursive(int *array, int *arr_temp,
-								t_range_limits bounds)
+static void	merge_sort_recursive(int *array, int *arr_temp, t_range_limits limits)
 {
-	int	mid;
+	char buf[100];
+	int len = sprintf(buf, "Chiamata ricorsiva: left=%d, right=%d\n", limits.left, limits.right);
+	write(1, buf, len);
 
-	if (bounds.left < bounds.right)
+	int	mid;
+	t_range_limits left;
+	t_range_limits right;
+
+	if (limits.left < limits.right)
 	{
-		mid = bounds.left + (bounds.right - bounds.left) / 2;
-		merge_sort_recursive(array, arr_temp,
-			(t_range_limits){bounds.left, 0, mid});
-		merge_sort_recursive(array, arr_temp,
-			(t_range_limits){mid + 1, 0, bounds.right});
-		bounds.mid = mid;
-		merge_arrays(array, arr_temp, bounds);
-		copy_arr_arr_temp_to_array(array, arr_temp, bounds.left, bounds.right);
+		mid = limits.left + (limits.right - limits.left) / 2;
+
+		left = (t_range_limits){limits.left, 0, mid};
+		right = (t_range_limits){mid + 1, 0, limits.right};
+		write(1, "Entrata in merge_sort\n", 23);
+		merge_sort_recursive(array, arr_temp, left);
+		merge_sort_recursive(array, arr_temp, right);
+
+		limits.mid = mid;
+		merge_arrays(array, arr_temp, limits);
+		copy_temp_to_array(array, arr_temp, limits);
 	}
 }
 
@@ -90,21 +98,20 @@ static void	merge_sort_recursive(int *array, int *arr_temp,
 ** merge_sort:
 ** Entry point for the merge sort algorithm.
 ** Allocates a temporary array used during the merge process,
-** initializes bounds to cover the full array, and starts the recursive sorting.
+** initializes limits to cover the full array, and starts the recursive sorting.
 ** Frees the temporary buffer after sorting is complete.
 ** If memory allocation fails, the function exits silently.
 */
 void	merge_sort(int *array, int size)
 {
 	int				*arr_temp;
-	t_range_limits	bounds;
+	t_range_limits	limits;
 
 	arr_temp = malloc(sizeof(int) * size);
 	if (!arr_temp)
 		return ;
-	bounds.left = 0;
-	bounds.right = size - 1;
-	bounds.mid = 0;
-	merge_sort_recursive(array, arr_temp, bounds);
+	limits.left = 0;
+	limits.right = size - 1;
+	merge_sort_recursive(array, arr_temp, limits);
 	free(arr_temp);
 }
