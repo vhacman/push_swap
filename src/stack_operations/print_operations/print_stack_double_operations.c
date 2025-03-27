@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void	ss(t_stack_node *a, t_stack_node *b)
+void	ss(t_stack_node **a, t_stack_node **b)
 {
-	swap_stack(a, stack_size(a));
-	swap_stack(b, stack_size(b));
+	swap_stack(*a, stack_size(*a));
+	swap_stack(*b, stack_size(*b));
 	write(1, "ss\n", 3);
 }
 

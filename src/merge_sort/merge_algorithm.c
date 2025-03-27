@@ -70,9 +70,9 @@ static void	copy_temp_to_array(int *array, int *arr_temp,
 */
 static void	merge_sort_recursive(int *array, int *arr_temp, t_range_limits limits)
 {
-	char buf[100];
-	int len = sprintf(buf, "Chiamata ricorsiva: left=%d, right=%d\n", limits.left, limits.right);
-	write(1, buf, len);
+	// char buf[100];
+	// int len = sprintf(buf, "Chiamata ricorsiva: left=%d, right=%d\n", limits.left, limits.right);
+	// write(1, buf, len);
 
 	int	mid;
 	t_range_limits left;
@@ -84,7 +84,7 @@ static void	merge_sort_recursive(int *array, int *arr_temp, t_range_limits limit
 
 		left = (t_range_limits){limits.left, 0, mid};
 		right = (t_range_limits){mid + 1, 0, limits.right};
-		write(1, "Entrata in merge_sort\n", 23);
+		// write(1, "Entrata in merge_sort\n", 23);
 		merge_sort_recursive(array, arr_temp, left);
 		merge_sort_recursive(array, arr_temp, right);
 

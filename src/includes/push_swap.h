@@ -100,6 +100,19 @@ void    		ss_array(int *s_a, int a_size, int *s_b, int b_size);
 void    		rr_array(int *s_a, int a_size, int *s_b, int b_size);
 void    		rrr_array(int *s_a, int a_size, int *s_b, int b_size);
 
+//print
+// Sezione prototipi funzioni stampate (print operations)
+void	ra(t_stack_node **a);
+void	rb(t_stack_node **b);
+void	rra(t_stack_node **a);
+void	rrb(t_stack_node **b);
+void	rr(t_stack_node **a, t_stack_node **b);
+void	rrr(t_stack_node **a, t_stack_node **b);
+void	pb(t_stack_node **a, t_stack_node **b);
+void	pa(t_stack_node **b, t_stack_node **a);
+void	sa(t_stack_node *a);
+void	sb(t_stack_node *b);
+void	ss(t_stack_node **a, t_stack_node **b);
 
 
 int	main(int ac, char **av);

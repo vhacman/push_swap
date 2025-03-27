@@ -102,5 +102,6 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 			continue ;
 		}
 		execute_optimal_move(a, b, target.cost);
+		push_stack(a, b);
 	}
 }

@@ -30,13 +30,13 @@ static int	is_number(char *str)
 	return (1);
 }
 
-static int	has_duplicates(t_stack_node **stack, int value)
+static int	has_duplicates(t_stack_node *stack, int value)
 {
-	while (*stack)
+	while (stack)
 	{
-		if ((*stack)->value == value)
+		if (stack->value == value)
 			return (1);
-		*stack = (*stack)->next;
+		stack = stack->next;
 	}
 	return (0);
 }
@@ -60,7 +60,7 @@ void	validate_input(char **av, int ac, t_stack_node **stack)
 		num = ft_atol(av[i]);
 		if (num > INT_MAX || num < INT_MIN)
 			exit_error();
-		if (has_duplicates(stack, (int)num))
+		if (has_duplicates(*stack, (int)num))
 			exit_error();
 		create_stack(stack, (int)num);
 		i++;
