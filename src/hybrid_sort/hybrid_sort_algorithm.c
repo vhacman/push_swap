@@ -90,7 +90,7 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 	int				chunk_limit;
 	t_target_info	target;
 
-	chunk_size = 25;
+	chunk_size = 45;
 	chunk_limit = chunk_size;
 	while (*a)
 	{
@@ -102,6 +102,7 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 			continue ;
 		}
 		execute_optimal_move(a, b, target.cost);
-		push_stack(a, b);
+		pb(a, b);
 	}
+	rebuild_stack_a(a, b);
 }

@@ -22,19 +22,19 @@ int	is_sorted(t_stack_node *stack)
 	}
 	return (1);
 }
-// void	print_stack(t_stack_node *stack, char *label)
-// {
-// 	write(1, label, strlen(label));
-// 	write(1, ": ", 2);
-// 	while (stack)
-// 	{
-// 		char buf[20];
-// 		int len = sprintf(buf, "%d ", stack->value);
-// 		write(1, buf, len);
-// 		stack = stack->next;
-// 	}
-// 	write(1, "\n", 1);
-// }
+void	print_stack(t_stack_node *stack, char *label)
+{
+	write(1, label, strlen(label));
+	write(1, ": ", 2);
+	while (stack)
+	{
+		char buf[20];
+		int len = sprintf(buf, "%d ", stack->value);
+		write(1, buf, len);
+		stack = stack->next;
+	}
+	write(1, "\n", 1);
+}
 
 void	print_indices(t_stack_node *stack)
 {
@@ -76,7 +76,6 @@ int	main(int ac, char **av)
 	merge_sort(temp_array, size);
 	assign_indices(stack_a, temp_array, size);
 	free(temp_array);
-	print_indices(stack_a);
 	if (is_sorted_and_empty(stack_a, stack_b))
 	{
 		free_stack(stack_a);
@@ -84,7 +83,8 @@ int	main(int ac, char **av)
 	}
 
 	hybrid_sort(&stack_a, &stack_b);
-	rebuild_stack_a(&stack_a, &stack_b);
+	// write(1, "FINAL STACK A: ", 15);
+	// print_stack(stack_a, "A");
 
 	free_stack(stack_a);
 	free_stack(stack_b);

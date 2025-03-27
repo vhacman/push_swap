@@ -56,6 +56,10 @@ void	push_stack(t_stack_node **from_stack, t_stack_node **to_stack)
 	*from_stack = (*from_stack)->next;
 	node_to_move->next = *to_stack;
 	*to_stack = node_to_move;
+	// write(1, "Pushed value: ", 14);
+    // char buf[20];
+    // int len = sprintf(buf, "%d\n", node_to_move->value);
+    // write(1, buf, len);
 }
 
 /**

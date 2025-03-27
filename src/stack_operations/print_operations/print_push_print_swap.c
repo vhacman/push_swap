@@ -26,6 +26,7 @@ void	sb(t_stack_node *b)
 
 void	pa(t_stack_node **b, t_stack_node **a)
 {
+	// write(2, "DEBUG: pa()\n", 12); 
 	push_stack(b, a);
 	write(1, "pa\n", 3);
 }

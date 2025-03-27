@@ -115,6 +115,10 @@ void	sa(t_stack_node *a);
 void	sb(t_stack_node *b);
 void	ss(t_stack_node **a, t_stack_node **b);
 
+//debug
+void	print_stack(t_stack_node *stack, char *label);
+void	print_indices(t_stack_node *stack);
+
 
 int	main(int ac, char **av);
 
