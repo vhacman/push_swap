@@ -75,8 +75,8 @@ void			swap_stack(t_stack_node *stack_head, int size);
 void			push_stack(t_stack_node **from_stack, t_stack_node **to_stack);
 void			rotate_stack(t_stack_node **stack_head);
 void			reverse_rotate_stack(t_stack_node **stack_head);
-void			ss_stack(t_stack_node *src_stack, int src_size,
-					t_stack_node *dest_stack, int dest_size);
+void			ss_stack(t_stack_node **src_stack, int src_size,
+					t_stack_node **dest_stack, int dest_size);
 void			rr_stack(t_stack_node **src_stack, t_stack_node **dest_stack);
 void			rrr_stack(t_stack_node **src_stack, t_stack_node **dest_stack);
 

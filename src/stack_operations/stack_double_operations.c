@@ -21,11 +21,11 @@
  *
  * Applies swap_stack to both stacks at the same time.
  */
-void	ss_stack(t_stack_node *src_stack, int src_size,
-			t_stack_node *dest_stack, int dest_size)
+void	ss_stack(t_stack_node **src_stack, int src_size,
+			t_stack_node **dest_stack, int dest_size)
 {
-	swap_stack(src_stack, src_size);
-	swap_stack(dest_stack, dest_size);
+	swap_stack(*src_stack, src_size);
+	swap_stack(*dest_stack, dest_size);
 }
 
 /**
