@@ -14,40 +14,42 @@
 
 /*
 ** merge_arrays:
-** Fonde due sotto-array ordinati (da 'left' a 'mid' e da 'mid+1' a 'right')
-** in un array temporaneo, mantenendo l'ordine crescente.
-** Non modifica direttamente l'array originale, ma costruisce una versione ordinata
-** nell'array temporaneo 'arr_temp'.
+** Merges two sorted subarrays->from 'left' to 'mid' and from 'mid+1' to 'right'
+** into a temporary array 'arr_temp', preserving sorted order.
+** Does not modify the original 'array' directly; instead, it builds the merged
+** result in 'arr_temp'.
 */
-static void merge_arrays(int *array, int *arr_temp, int left, int mid, int right)
+static void	merge_arrays(int *array, int *arr_temp, t_range_limits limits)
 {
-	int i; //indice per iterare sul sub_array sx (da left a mid)
-	int j; //indice per iterare sul sub_array dx (mid +1 a right)
-	int k; //indice per posizionare gli elementi ordinati in arr_temp
+	int	i;
+	int	j;
+	int	k;
 
-	i = left;
-	j = mid + 1;
-	k = left; //posizione corrente nell'array temporaneo
-	while (i <= mid && j <= right)
+	i = limits.left;
+	j = limits.mid + 1;
+	k = limits.left;
+	while (i <= limits.mid && j <= limits.right)
 	{
 		if (array[i] <= array[j])
 			arr_temp[k++] = array[i++];
 		else
 			arr_temp[k++] = array[j++];
 	}
-	while (i <= mid)
+	while (i <= limits.mid)
 		arr_temp[k++] = array[i++];
-	while (j <= right)
+	while (j <= limits.right)
 		arr_temp[k++] = array[j++];
 }
 
 /*
 ** copy_arr_arr_temp_to_array:
-** Copia i valori ordinati dall'array temporaneo 'arr_arr_temp' all'array originale 'array',
-** limitandosi alla porzione compresa tra gli indici 'left' e 'right'.
-** Serve a riflettere nell'array di partenza l'effettivo ordinamento calcolato.
+** Copies the sorted segment from the temporary array 'arr_arr_temp'
+** back to the original array 'array', only between the given indices
+** 'left' and 'right'. This reflects the sorted order permanently in
+** the original input.
 */
-static void	copy_arr_arr_temp_to_array(int *array, int *arr_arr_temp, int left, int right)
+static void	copy_arr_arr_temp_to_array(int *array, int *arr_arr_temp,
+										int left, int right)
 {
 	int	i;
 
@@ -61,39 +63,48 @@ static void	copy_arr_arr_temp_to_array(int *array, int *arr_arr_temp, int left, 
 
 /*
 ** merge_sort_recursive:
-** Implementa ricorsivamente l'algoritmo di Merge Sort.
-** Divide l'array in due metà, ordina ciascuna ricorsivamente,
-** poi le fonde con 'merge_arrays' e copia il risultato ordinato nell'array originale.
+** Recursive implementation of the Merge Sort algorithm.
+** It divides the array into two halves, recursively sorts each half,
+** then merges the sorted halves into a temporary array.
+** Finally, it copies the result back into the original array.
 */
-static void merge_sort_recursive(int *array, int *arr_arr_temp, int left, int right)
+static void	merge_sort_recursive(int *array, int *arr_temp,
+								t_range_limits bounds)
 {
-	int mid;
-      //se c'è almeno un elemento da ordinare, quindi se ci sono almeno due elementi
-	if (left < right)
+	int	mid;
+
+	if (bounds.left < bounds.right)
 	{
-		//Calcola il mid evitando l'overflow: usa left + (right - left) / 2 invece di (left + right) / 2
-		mid = left + (right - left) / 2;
-		merge_sort_recursive(array, arr_arr_temp, left, mid);
-		merge_sort_recursive(array, arr_arr_temp, mid + 1, right);
-		merge_arrays(array, arr_arr_temp, left, mid, right);
-		copy_arr_arr_temp_to_array(array, arr_arr_temp, left, right);
+		mid = bounds.left + (bounds.right - bounds.left) / 2;
+		merge_sort_recursive(array, arr_temp,
+			(t_range_limits){bounds.left, 0, mid});
+		merge_sort_recursive(array, arr_temp,
+			(t_range_limits){mid + 1, 0, bounds.right});
+		bounds.mid = mid;
+		merge_arrays(array, arr_temp, bounds);
+		copy_arr_arr_temp_to_array(array, arr_temp, bounds.left, bounds.right);
 	}
 }
 
 /*
 ** merge_sort:
-** Funzione di avvio per l'algoritmo Merge Sort.
-** Alloca un array temporaneo e chiama la funzione ricorsiva per ordinare l'array.
-** Libera la memoria temporanea alla fine del processo.
-** Se malloc fallisce, non fa nulla.
+** Entry point for the merge sort algorithm.
+** Allocates a temporary array used during the merge process,
+** initializes bounds to cover the full array, and starts the recursive sorting.
+** Frees the temporary buffer after sorting is complete.
+** If memory allocation fails, the function exits silently.
 */
-void    merge_sort(int *array, int size)
+void	merge_sort(int *array, int size)
 {
-	int *arr_temp;
+	int				*arr_temp;
+	t_range_limits	bounds;
 
 	arr_temp = malloc(sizeof(int) * size);
 	if (!arr_temp)
 		return ;
-	merge_sort_recursive(array, arr_temp, 0, size - 1);
-	free (arr_temp);
+	bounds.left = 0;
+	bounds.right = size - 1;
+	bounds.mid = 0;
+	merge_sort_recursive(array, arr_temp, bounds);
+	free(arr_temp);
 }

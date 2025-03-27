@@ -48,7 +48,7 @@ void	rr_stack(t_stack_node **src_stack, t_stack_node **dest_stack)
  *
  * Moves the last element of each stack to the top.
  */
-void	rrr_stacl(t_stack_node **src_stack, t_stack_node **dest_stack)
+void	rrr_stack(t_stack_node **src_stack, t_stack_node **dest_stack)
 {
 	reverse_rotate_stack(src_stack);
 	reverse_rotate_stack(dest_stack);

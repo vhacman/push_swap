@@ -28,6 +28,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	ft_bzero(void *s, size_t n);
