@@ -75,14 +75,17 @@ int	main(int ac, char **av)
 
 	merge_sort(temp_array, size);
 	assign_indices(stack_a, temp_array, size);
+	if (size == 500)
+		ultra_chunk_sort(&stack_a, &stack_b, size);
+	else
+		hybrid_sort(&stack_a, &stack_b);
+
 	free(temp_array);
 	if (is_sorted_and_empty(stack_a, stack_b))
 	{
 		free_stack(stack_a);
 		return (0);
 	}
-
-	hybrid_sort(&stack_a, &stack_b);
 	// write(1, "FINAL STACK A: ", 15);
 	// print_stack(stack_a, "A");
 

@@ -12,6 +12,38 @@
 
 #include "push_swap.h"
 
+int	is_stack_b_sorted(t_stack_node *b)
+{
+	while (b && b->next)
+	{
+		if (b->index < b->next->index)
+			return (0);
+		b = b->next;
+	}
+	return (1);
+}
+void	final_rotate_a(t_stack_node **a)
+{
+	int		size;
+	int		pos;
+	t_stack_node	*curr;
+
+	curr = *a;
+	size = stack_size(*a);
+	pos = 0;
+	while (curr && curr->index != 0)
+	{
+		pos++;
+		curr = curr->next;
+	}
+	if (pos <= size / 2)
+		while ((*a)->index != 0)
+			ra(a);
+	else
+		while ((*a)->index != 0)
+			rra(a);
+}
+
 void	rebuild_stack_a(t_stack_node **a, t_stack_node **b)
 {
 	while (*b)
@@ -58,13 +90,15 @@ void	rebuild_stack_a(t_stack_node **a, t_stack_node **b)
 				rrb(b); // ruota verso il basso
 		}
 
-		if (*b == NULL)
-		{	
-			return ;
-		}
-		else
-			pa(b, a);
-	
+		pa(b, a);
+		// if (*b == NULL)
+		// {	
+		// 	return ;
+		// }
+		// else
+		// 	pa(b, a);
+		// se il max appena inserito non è in ordine → ruota a
+			
  // push da b a a
 		        // Debugging - check the stack contents after push
 		// write(1, "Stack A after push: ", 19);

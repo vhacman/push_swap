@@ -47,25 +47,59 @@ int	distance_to_top(t_stack_node *stack, t_stack_node *target)
 //se la diff è positiva(quindi il nodo B ha indic più alto) e 
 //più piccola trovata finora, salva quella posizione
 //restituisce la posizione migliore trovata.
-int	find_target_position_b(t_stack_node *stack_b, int index)
+// int	find_target_position_b(t_stack_node *stack_b, int index)
+// {
+// 	int	pos;
+// 	int	best_diff;
+// 	int	best_pos;
+// 	int	diff;
+
+// 	if (!stack_b)
+// 		return(0);
+// 	pos = 0;
+// 	best_diff = -1;
+// 	best_pos = 0;
+// 	while (stack_b)
+// 	{
+// 		diff = stack_b->index - index;
+// 		if (diff > 0 && diff < best_diff)
+// 		{
+// 			best_diff = diff;
+// 			best_pos = pos;
+// 		}
+// 		stack_b = stack_b->next;
+// 		pos++;
+// 	}
+// 	return (best_pos);
+// }
+
+int	find_target_position_b(t_stack_node *stack_b)
 {
-	int	pos;
-	int	best_diff;
-	int	best_pos;
-	int	diff;
+	int				pos;
+	int				best_pos;
+	int				best_cost;
+	int				size;
+	t_stack_node	*curr;
 
 	pos = 0;
-	best_diff = INT_MAX;
 	best_pos = 0;
-	while (stack_b)
+	best_cost = INT_MAX;
+	size = stack_size(stack_b);
+	curr = stack_b;
+
+	while (curr)
 	{
-		diff = stack_b->index - index;
-		if (diff > 0 && diff < best_diff)
+		// calcola costo per portare questa posizione in cima
+		int cost = pos;
+		if (pos > size / 2)
+			cost = size - pos;
+
+		if (cost < best_cost)
 		{
-			best_diff = diff;
+			best_cost = cost;
 			best_pos = pos;
 		}
-		stack_b = stack_b->next;
+		curr = curr->next;
 		pos++;
 	}
 	return (best_pos);

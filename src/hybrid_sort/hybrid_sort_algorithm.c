@@ -29,7 +29,7 @@ static void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
 	size_a = stack_size(*stack_a);
 	size_b = stack_size(*stack_b);
 	pos_a = distance_to_top(*stack_a, node);
-	pos_b = find_target_position_b(*stack_b, node->index);
+	pos_b = find_target_position_b(*stack_b);
 	cost->rotations_a = pos_a;
 	if (pos_a > size_a / 2)
 	{
@@ -49,6 +49,25 @@ static void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
 	cost->total_moves = cost->rotations_a + cost->rotations_b;
 }
 
+void	smart_pb(t_stack_node **a, t_stack_node **b)
+{
+	int	size;
+	int	index;
+
+	if (!*a)
+		return ;
+
+	index = (*a)->index;
+	size = stack_size(*a) + stack_size(*b);
+
+	pb(a, b);
+
+	// ruota solo se b ha abbastanza elementi
+	if (*b && (*b)->next && stack_size(*b) > 4 && index < size / 2)
+		rb(b);
+}
+
+
 /*
  * Scans through stack A to find the best candidate node to push to stack B,
  * based on whether its index is within the current chunk limit.
@@ -67,15 +86,22 @@ static void	update_if_better_target(t_stack_node **a, t_stack_node **b,
 		if (curr->index < chunk_limit)
 		{
 			calculate_move_cost(a, b, curr, &cost);
+
 			if (cost.total_moves < target->cost.total_moves)
 			{
 				target->cost = cost;
 				target->node = curr;
+
+				// escape se il costo è minimo
+				if (cost.rotations_b == 0 && cost.rotations_a == 0)
+					break;
 			}
 		}
 		curr = curr->next;
 	}
 }
+
+
 
 /*
  * Main hybrid sort logic:
@@ -87,10 +113,17 @@ static void	update_if_better_target(t_stack_node **a, t_stack_node **b,
 void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 {
 	int				chunk_size;
-	int				chunk_limit;
+	int				chunk_limit = 0;
+	int				size;
 	t_target_info	target;
 
-	chunk_size = 45;
+	size = stack_size(*a);
+	if (chunk_limit < size / 2)
+		chunk_size = size / 20; // più aggressivo
+	else
+		chunk_size = size / 10; // più rilassato verso la fine
+
+
 	chunk_limit = chunk_size;
 	while (*a)
 	{
@@ -101,8 +134,12 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 			chunk_limit += chunk_size;
 			continue ;
 		}
-		execute_optimal_move(a, b, target.cost);
-		pb(a, b);
+		execute_combo_move(a, b, target.cost);
 	}
-	rebuild_stack_a(a, b);
+	if (is_stack_b_sorted(*b))
+		while (*b)
+			pa(b, a);
+	else
+		rebuild_stack_a(a, b);
+	final_rotate_a(a);
 }

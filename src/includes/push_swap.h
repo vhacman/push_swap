@@ -83,11 +83,12 @@ void			rrr_stack(t_stack_node **src_stack, t_stack_node **dest_stack);
 
 // COST_UTILS.C
 int				distance_to_top(t_stack_node *stack, t_stack_node *target);
-int				find_target_position_b(t_stack_node *stack_b, int index);
+int				find_target_position_b(t_stack_node *stack_b);
 void			init_target_info(t_target_info *info);
 //HYBRID_SORT_ALGORITHM.c
 void			hybrid_sort(t_stack_node **a, t_stack_node **b);
 void			execute_optimal_move(t_stack_node **a, t_stack_node **b, t_cost cost);
+void	execute_combo_move(t_stack_node **a, t_stack_node **b, t_cost cost);
 //MERGE_ALGORITHM.C
 void			merge_sort(int *array, int size);
 
@@ -118,7 +119,10 @@ void	ss(t_stack_node **a, t_stack_node **b);
 //debug
 void	print_stack(t_stack_node *stack, char *label);
 void	print_indices(t_stack_node *stack);
-
+void	smart_pb(t_stack_node **a, t_stack_node **b);
+int		is_stack_b_sorted(t_stack_node *b);
+void	final_rotate_a(t_stack_node **a);
+void	ultra_chunk_sort(t_stack_node **a, t_stack_node **b, int total_size);
 
 int	main(int ac, char **av);
 

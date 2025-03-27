@@ -1,3 +1,0 @@
-DEBUG: pa()
-DEBUG: pa()
-DEBUG: pa()
