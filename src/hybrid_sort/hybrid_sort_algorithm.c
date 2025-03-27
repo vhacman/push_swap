@@ -31,12 +31,21 @@ static void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
 	pos_a = distance_to_top(*stack_a, node);
 	pos_b = find_target_position_b(*stack_b, node->index);
 	cost->rotations_a = pos_a;
-	cost->rotations_a = 1;
 	if (pos_a > size_a / 2)
 	{
 		cost->direction_a = -1;
 		cost->rotations_a = size_a - pos_a;
 	}
+	else
+		cost->direction_a = 1;
+	cost->rotations_b = pos_b;
+	if (pos_b > size_b / 2)
+	{
+		cost->direction_b = -1;
+		cost->rotations_b = size_b - pos_b;
+	}
+	else
+		cost->direction_b = 1;
 	cost->total_moves = cost->rotations_a + cost->rotations_b;
 }
 

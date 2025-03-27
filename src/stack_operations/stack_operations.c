@@ -25,7 +25,7 @@
  */
 void	swap_stack(t_stack_node *stack_head, int size)
 {
-	int	*temp_value;
+	int	temp_value;
 
 	if (size < 2 || !stack_head || !stack_head->next)
 		return ;

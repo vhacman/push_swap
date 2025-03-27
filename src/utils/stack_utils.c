@@ -33,11 +33,12 @@ void	*create_stack(t_stack_node **stack, int value)
 	if (!new_node)
 		return (NULL);
 	ft_lstadd_front((t_list **)stack, (t_list *)new_node);
+	return (NULL);
 }
 
 int	stack_size(t_stack_node *stack)
 {
-	return (ft_lstsize(stack));
+	return (ft_lstsize((t_list *)stack));
 }
 
 int	*convert_stack_to_array(t_stack_node *stack, int stack_size)

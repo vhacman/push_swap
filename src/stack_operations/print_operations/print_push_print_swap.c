@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_check.c                                      :+:      :+:    :+:   */
+/*   print_stack_operations.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 11:38:04 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/27 11:38:04 by vhacman          ###   ########.fr       */
+/*   Created: 2025/03/27 11:48:15 by vhacman           #+#    #+#             */
+/*   Updated: 2025/03/27 11:48:15 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int is_sorted_and_empty(t_stack_node *stack_a, t_stack_node *stack_b)
+void	sa(t_stack_node *a)
 {
-    t_stack_node    *curr;
+	swap_stack(a, stack_size(a));
+	write(1, "sa\n", 3);
+}
 
-    if (stack_b != NULL)
-        return (0);
-    curr = stack_a;
-    while (curr && curr->next)
-    {
-        if (curr->value > curr->next->value)
-            return (0);
-        curr = curr->next;
-    }
-    return (1);
+void	sb(t_stack_node *b)
+{
+	swap_stack(b, stack_size(b));
+	write(1, "sb\n", 3);
+}
+
+void	pa(t_stack_node **b, t_stack_node **a)
+{
+	push_stack(b, a);
+	write(1, "pa\n", 3);
+}
+
+void	pb(t_stack_node **a, t_stack_node **b)
+{
+	push_stack(a, b);
+	write(1, "pb\n", 3);
 }

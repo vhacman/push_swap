@@ -53,7 +53,7 @@ void	rotate(int *array, int size)
 
 	i = 0;
 	if (size < 2)
-		return (NULL);
+		return ;
 	temp = array[0];
 	while (i < size - 1)
 	{

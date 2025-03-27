@@ -55,7 +55,7 @@ void	validate_input(char **av, int ac, t_stack_node **stack)
 	i = 1;
 	while (i < ac)
 	{
-		if (!is_numeric(av[i]))
+		if (!is_number(av[i]))
 			exit_error();
 		num = ft_atol(av[i]);
 		if (num > INT_MAX || num < INT_MIN)

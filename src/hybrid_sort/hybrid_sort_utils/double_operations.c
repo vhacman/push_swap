@@ -12,19 +12,19 @@
 
 #include "push_swap.h"
 
-void	ss(int *s_a, int a_size, int *s_b, int b_size)
+void	ss_array(int *s_a, int a_size, int *s_b, int b_size)
 {
 	swap(s_a, a_size);
 	swap(s_b, b_size);
 }
 
-void	rr(int *s_a, int a_size, int *s_b, int b_size)
+void	rr_array(int *s_a, int a_size, int *s_b, int b_size)
 {
 	rotate(s_a, a_size);
 	rotate(s_b, b_size);
 }
 
-void	rrr(int *s_a, int a_size, int *s_b, int b_size)
+void	rrr_array(int *s_a, int a_size, int *s_b, int b_size)
 {
 	reverse_rotate(s_a, a_size);
 	reverse_rotate(s_b, b_size);

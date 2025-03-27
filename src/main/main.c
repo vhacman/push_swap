@@ -35,6 +35,7 @@ int	main(int ac, char **av)
 	free(temp_array);
 	if (is_sorted_and_empty(stack_a, stack_b))
 		return (0);
+	write(1, "Start hybrid_sort\n", 18);
 	hybrid_sort(&stack_a, &stack_b);
 	rebuild_stack_a(&stack_a, &stack_b);
 	free_stack(stack_a);
