@@ -83,7 +83,7 @@ void			rrr_stack(t_stack_node **src_stack, t_stack_node **dest_stack);
 
 // COST_UTILS.C
 int				distance_to_top(t_stack_node *stack, t_stack_node *target);
-int				find_target_position_b(t_stack_node *stack_b);
+int	find_target_position_b(t_stack_node *stack_b, int index);
 void			init_target_info(t_target_info *info);
 //HYBRID_SORT_ALGORITHM.c
 void			hybrid_sort(t_stack_node **a, t_stack_node **b);
@@ -125,6 +125,8 @@ void	final_rotate_a(t_stack_node **a);
 void	ultra_chunk_sort(t_stack_node **a, t_stack_node **b, int total_size);
 void	mini_sort_a(t_stack_node **a, t_stack_node **b);
 int		main(int ac, char **av);
-int is_sorted(t_stack_node *stack);
+int		is_sorted(t_stack_node *stack);
+void update_if_better_target(t_stack_node **a, t_stack_node **b,
+                             int chunk_limit, t_target_info *target);
 
 #endif

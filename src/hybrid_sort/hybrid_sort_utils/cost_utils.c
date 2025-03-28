@@ -73,33 +73,54 @@ int	distance_to_top(t_stack_node *stack, t_stack_node *target)
 // 	return (best_pos);
 // }
 
-int	find_target_position_b(t_stack_node *stack_b)
+// int	find_target_position_b(t_stack_node *stack_b)
+// {
+// 	int				pos;
+// 	int				best_pos;
+// 	int				best_cost;
+// 	int				size;
+// 	t_stack_node	*curr;
+
+// 	pos = 0;
+// 	best_pos = 0;
+// 	best_cost = INT_MAX;
+// 	size = stack_size(stack_b);
+// 	curr = stack_b;
+
+// 	while (curr)
+// 	{
+// 		// calcola costo per portare questa posizione in cima
+// 		int cost = pos;
+// 		if (pos > size / 2)
+// 			cost = size - pos;
+
+// 		if (cost < best_cost)
+// 		{
+// 			best_cost = cost;
+// 			best_pos = pos;
+// 		}
+// 		curr = curr->next;
+// 		pos++;
+// 	}
+// 	return (best_pos);
+// }
+
+int	find_target_position_b(t_stack_node *stack_b, int index)
 {
-	int				pos;
-	int				best_pos;
-	int				best_cost;
-	int				size;
-	t_stack_node	*curr;
+	int	pos = 0;
+	int	best_pos = 0;
+	int	best_diff = INT_MAX;
+	int	diff;
 
-	pos = 0;
-	best_pos = 0;
-	best_cost = INT_MAX;
-	size = stack_size(stack_b);
-	curr = stack_b;
-
-	while (curr)
+	while (stack_b)
 	{
-		// calcola costo per portare questa posizione in cima
-		int cost = pos;
-		if (pos > size / 2)
-			cost = size - pos;
-
-		if (cost < best_cost)
+		diff = stack_b->index - index;
+		if (diff > 0 && diff < best_diff)
 		{
-			best_cost = cost;
+			best_diff = diff;
 			best_pos = pos;
 		}
-		curr = curr->next;
+		stack_b = stack_b->next;
 		pos++;
 	}
 	return (best_pos);

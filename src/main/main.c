@@ -156,7 +156,7 @@ int	main(int ac, char **av)
 		free_stack(stack_a);
 		return (0);
 	}
-	if (size == 500)
+	if (size >= 500)
 		ultra_chunk_sort(&stack_a, &stack_b, size);
 	else
 		hybrid_sort(&stack_a, &stack_b);
@@ -170,4 +170,3 @@ int	main(int ac, char **av)
 	free_stack(stack_b);
 	return (0);
 }
-

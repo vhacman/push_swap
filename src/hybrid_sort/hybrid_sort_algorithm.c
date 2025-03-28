@@ -29,7 +29,7 @@ static void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
 	size_a = stack_size(*stack_a);
 	size_b = stack_size(*stack_b);
 	pos_a = distance_to_top(*stack_a, node);
-	pos_b = find_target_position_b(*stack_b);
+	pos_b = find_target_position_b(*stack_b, node->index);
 	cost->rotations_a = pos_a;
 	if (pos_a > size_a / 2)
 	{
@@ -74,8 +74,8 @@ void	smart_pb(t_stack_node **a, t_stack_node **b)
  * For each valid node, it calculates the cost and updates the target
  * if a better (cheaper) move is found.
  */
-static void	update_if_better_target(t_stack_node **a, t_stack_node **b,
-									int chunk_limit, t_target_info *target)
+void update_if_better_target(t_stack_node **a, t_stack_node **b,
+                             int chunk_limit, t_target_info *target)
 {
 	t_stack_node	*curr;
 	t_cost			cost;
@@ -87,19 +87,21 @@ static void	update_if_better_target(t_stack_node **a, t_stack_node **b,
 		{
 			calculate_move_cost(a, b, curr, &cost);
 
-			if (cost.total_moves < target->cost.total_moves)
+			int penalized_moves = cost.total_moves;
+
+			if (penalized_moves < target->cost.total_moves)
 			{
 				target->cost = cost;
 				target->node = curr;
 
-				// escape se il costo è minimo
-				if (cost.rotations_b == 0 && cost.rotations_a == 0)
+				if (cost.rotations_a == 0 && cost.rotations_b == 0)
 					break;
 			}
 		}
 		curr = curr->next;
 	}
 }
+
 
 
 
@@ -113,17 +115,22 @@ static void	update_if_better_target(t_stack_node **a, t_stack_node **b,
 void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 {
 	int				chunk_size;
-	int				chunk_limit = 0;
+	int				chunk_limit;
 	int				size;
 	t_target_info	target;
 
-	if (is_sorted(*a)) // evita loop se già ordinato
+	if (is_sorted(*a))
 		return ;
 
 	size = stack_size(*a);
-	chunk_size = size / 20;
-	if (chunk_size < 5)
-		chunk_size = 5;
+
+	if (size <= 100)
+		chunk_size = 3;
+	else if (size <= 500)
+		chunk_size = size / 20;
+	else
+		chunk_size = 30;
+
 	chunk_limit = chunk_size;
 
 	while (*a)
@@ -146,4 +153,5 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 
 	final_rotate_a(a);
 }
+
 
