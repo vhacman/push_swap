@@ -56,4 +56,14 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+valgrind:
+	@echo "🧠 ɪɴɪᴛɪᴀʟɪᴢɪɴɢ ɴᴇᴜʀᴀʟ ꜱᴄᴀɴ..."
+	@echo "🔍 ʟᴀᴜɴᴄʜɪɴɢ $(NAME) ᴜɴᴅᴇʀ ᴍᴇᴍᴏʀʏ ꜱᴜʀᴠᴇɪʟʟᴀɴᴄᴇ..."
+	@for i in {1..50}; do \
+		ARG="$$(seq 0 499 | shuf | tr '\n' ' ')"; \
+		valgrind --leak-check=full ./$(NAME) $$ARG; \
+	done
+	@echo "✅ ᴍᴇᴍᴏʀʏ ꜱᴄᴀɴ ᴄᴏᴍᴘʟᴇᴛᴇ — ɴᴏ ꜱᴜʀᴠɪᴠᴏʀꜱ ʜᴏᴘᴇꜰᴜʟʟʏ ☠️"
+
+
+.PHONY: all clean fclean re valgrind

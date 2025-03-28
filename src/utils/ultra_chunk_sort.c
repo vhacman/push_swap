@@ -38,7 +38,7 @@ static int	find_position(t_stack_node *stack, int index)
 
 void	ultra_chunk_sort(t_stack_node **a, t_stack_node **b, int total_size)
 {
-	int	chunk_size = total_size / 13;
+	int	chunk_size = total_size / 10;
 	int	chunk_limit = chunk_size;
 	int	i;
 	t_stack_node *tmp;
@@ -70,6 +70,13 @@ void	ultra_chunk_sort(t_stack_node **a, t_stack_node **b, int total_size)
 		else
 			while ((*b)->index != max_index)
 				rrb(b);
+		
+		// if (is_stack_b_sorted(*b))
+		// 	while (*b)
+		// 		pa(b, a);
+		// else
+		// 	rebuild_stack_a(a, b);
+		// final_rotate_a(a);
 		pa(b, a);
 	}
 }
