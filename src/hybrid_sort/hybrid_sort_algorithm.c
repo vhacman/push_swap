@@ -119,7 +119,7 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 	int				size;
 	t_target_info	target;
 
-	if (is_sorted(*a))
+	if ((*a))
 		return ;
 
 	size = stack_size(*a);

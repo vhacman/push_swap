@@ -6,11 +6,17 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:08:33 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/28 18:28:03 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/29 00:16:36 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	exit_error(void)
+{
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
 
 int	is_sorted(t_stack_node *stack)
 {
@@ -48,10 +54,8 @@ int	initialize_stack(int ac, char **av, t_stack_node **stack_a)
 	return (size);
 }
 
-void	perform_sorting(t_stack_node **stack_a, t_stack_node **stack_b)
+void	perform_sorting(t_stack_node **stack_a, t_stack_node **stack_b, int size)
 {
-	int	size;
-
 	if (is_sorted(*stack_a))
 	{
 		free_stack(*stack_a);
