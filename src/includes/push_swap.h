@@ -123,7 +123,8 @@ void	smart_pb(t_stack_node **a, t_stack_node **b);
 int		is_stack_b_sorted(t_stack_node *b);
 void	final_rotate_a(t_stack_node **a);
 void	ultra_chunk_sort(t_stack_node **a, t_stack_node **b, int total_size);
-
-int	main(int ac, char **av);
+void	mini_sort_a(t_stack_node **a, t_stack_node **b);
+int		main(int ac, char **av);
+int is_sorted(t_stack_node *stack);
 
 #endif

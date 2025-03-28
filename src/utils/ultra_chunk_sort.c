@@ -40,7 +40,7 @@ void	ultra_chunk_sort(t_stack_node **a, t_stack_node **b, int total_size)
 {
 	int	chunk_size = total_size / 10;
 	int	chunk_limit = chunk_size;
-	int	i;
+	int	i = 0;
 	t_stack_node *tmp;
 
 	while (*a)

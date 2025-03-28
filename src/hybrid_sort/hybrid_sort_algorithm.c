@@ -117,14 +117,15 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 	int				size;
 	t_target_info	target;
 
+	if (is_sorted(*a)) // evita loop se già ordinato
+		return ;
+
 	size = stack_size(*a);
-	if (chunk_limit < size / 2)
-		chunk_size = size / 20; // più aggressivo
-	else
-		chunk_size = size / 10; // più rilassato verso la fine
-
-
+	chunk_size = size / 20;
+	if (chunk_size < 5)
+		chunk_size = 5;
 	chunk_limit = chunk_size;
+
 	while (*a)
 	{
 		init_target_info(&target);
@@ -136,10 +137,13 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 		}
 		execute_combo_move(a, b, target.cost);
 	}
+
 	if (is_stack_b_sorted(*b))
 		while (*b)
 			pa(b, a);
 	else
 		rebuild_stack_a(a, b);
+
 	final_rotate_a(a);
 }
+
