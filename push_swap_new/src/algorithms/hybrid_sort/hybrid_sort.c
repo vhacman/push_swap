@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 00:24:44 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/28 17:31:33 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/29 02:51:06 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 		return ;
 	size = stack_size(*a);
 	if (size <= 100)
-		chunk_size = 3;
+		chunk_size = 5;
 	else if (size <= 500)
 		chunk_size = size / 20;
 	else
