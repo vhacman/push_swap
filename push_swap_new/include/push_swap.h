@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:50:34 by vhacman           #+#    #+#             */
-/*   Updated: 2025/04/01 00:56:00 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/01 00:58:45 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ int		*convert_stack_to_array(t_stack_node *stack, int stack_size);
 /* ===================== STACK CREATION & SIZE ===================== */
 
 t_stack_node		*create_stack_node(int value);
-void				create_stack(t_stack_node **stack, int value);
-int					stack_size(t_stack_node *stack);
+void		create_stack(t_stack_node **stack, int value);
+int			stack_size(t_stack_node *stack);
 
 /* ===================== LINKED LIST STACK OPERATIONS ===================== */
 
