@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:17:26 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/28 17:50:29 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/31 18:26:12 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ static void	rotate_individual(t_stack_node **a, t_stack_node **b, t_cost *cost)
 			rrb(b);
 		cost->rotations_b--;
 	}
+}
+
+void	execute_combo_rebuild(t_stack_node **a, t_stack_node **b, t_cost cost)
+{
+	if (cost.rotations_a == 0 && cost.rotations_b == 0)
+	{
+		pa(b, a);
+		return ;
+	}
+	rotate_both(a, b, &cost);
+	rotate_individual(a, b, &cost);
+	pa(b, a);
 }
 
 void	execute_combo_move(t_stack_node **a, t_stack_node **b, t_cost cost)

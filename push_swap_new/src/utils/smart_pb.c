@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:24:42 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/28 17:51:33 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/31 19:19:23 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	smart_pb(t_stack_node **a, t_stack_node **b)
 	index = (*a)->index;
 	size = stack_size(*a) + stack_size(*b);
 	pb(a, b);
-	if (*b && (*b)->next && stack_size(*b) > 4 && index < size / 2)
+	if (*b && (*b)->next && stack_size(*b) > 4 && index < size / 7)
 		rb(b);
 }

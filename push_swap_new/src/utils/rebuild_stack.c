@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:55:20 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/28 18:01:12 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/31 21:13:30 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,50 @@ void	rebuild_stack_a(t_stack_node **a, t_stack_node **b)
 		pa(b, a);
 	}
 }
+// int	get_max_index(t_stack_node *stack)
+// {
+// 	int	max;
+
+// 	if (!stack)
+// 		return (-1);
+// 	max = stack->index;
+// 	while (stack)
+// 	{
+// 		if (stack->index > max)
+// 			max = stack->index;
+// 		stack = stack->next;
+// 	}
+// 	return (max);
+// }
+
+// t_stack_node	*find_max_node(t_stack_node *stack)
+// {
+// 	t_stack_node	*max;
+
+// 	if (!stack)
+// 		return (NULL);
+// 	max = stack;
+// 	while (stack)
+// 	{
+// 		if (stack->index > max->index)
+// 			max = stack;
+// 		stack = stack->next;
+// 	}
+// 	return (max);
+// }
+
+// t_stack_node	*find_min_node(t_stack_node *stack)
+// {
+// 	t_stack_node	*min;
+
+// 	if (!stack)
+// 		return (NULL);
+// 	min = stack;
+// 	while (stack)
+// 	{
+// 		if (stack->index < min->index)
+// 			min = stack;
+// 		stack = stack->next;
+// 	}
+// 	return (min);
+// }

@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:50:34 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/29 00:27:06 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/31 22:49:00 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void			swap(int *array, int size);
 void			push(int *src, int *src_size, int *dest, int *dest_size);
 void			rotate(int *array, int size);
 void			reverse_rotate(int *array, int size);
-void			update_if_better_target(t_stack_node **a, t_stack_node **b,
-					int chunk_limit, t_target_info *target);
+void			if_better_target(t_stack_node **a, t_stack_node **b,
+					int chunk_limit, t_target_info *target, int chunk_size);
 void			hybrid_sort(t_stack_node **a, t_stack_node **b);
 void			merge_sort(int *array, int size);
 int				find_position_of_index(t_stack_node *stack, int index);
@@ -122,4 +122,13 @@ void			rrr_stack(t_stack_node **src_stack, t_stack_node **dest_stack);
 void			rr_stack(t_stack_node **src_stack, t_stack_node **dest_stack);
 void			ss_stack(t_stack_node **src_stack, int src_size,
 					t_stack_node **dest_stack, int dest_size);
+int				is_number(char *str);
+int				has_duplicates(t_stack_node *stack, int value);
+void			calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
+				t_stack_node *node, t_cost *cost);
+void			execute_combo_rebuild(t_stack_node **a, t_stack_node **b, t_cost cost);
+void			set_rotations(int pos, int size, int *direction, int *rotations);
+// int	find_max_index(t_stack_node *b);
+// int	find_min_index(t_stack_node *stack);
+void	free_split(char **token);
 #endif

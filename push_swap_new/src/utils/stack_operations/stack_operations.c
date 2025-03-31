@@ -12,17 +12,20 @@
 
 #include "push_swap.h"
 
-/**
- * swap_stack - Swaps the values of the first two nodes of a stack.
- * @stack_head: Pointer to the head of the stack.
- * @size: The size of the stack (used to prevent invalid operations).
+/* Swaps the values of the first two nodes of the stack.
  *
- * If the stack has fewer than two elements or is NULL, nothing happens.
- * The function swaps the content (value pointer) of the top two nodes.
+ * This function checks if there are at least two elements in the stack
+ * (using the parameter 'size' and verifying that the head and its next
+ * pointer are not NULL). If the condition is met, it swaps the 'value'
+ * fields of the first node and the second node.
  *
- * Example:
- *     Input stack: [3, 2, 1] → After swap_stack: [2, 3, 1]
- */
+ * The swap operation is a basic yet fundamental move in many 
+ * sorting algorithms, including those used in push_swap. Instead of
+ * physically reordering nodes in the linked list (which would involve
+ * updating pointers), this implementation simply exchanges the data
+ * (the 'value' fields) of the first two nodes. This approach is
+ * efficient for small operations and helps to minimize the overall
+ * number of moves required during sorting.*/
 void	swap_stack(t_stack_node *stack_head, int size)
 {
 	int	temp_value;
@@ -34,18 +37,14 @@ void	swap_stack(t_stack_node *stack_head, int size)
 	stack_head->next->value = temp_value;
 }
 
-/**
- * push_stack - Pushes the top node from one stack to another.
- * @from_stack: Pointer to the source stack (node will be removed from here).
- * @to_stack: Pointer to the destination stack (node will be added here).
+/* Moves the top node from one stack to another.
  *
- * If the source stack is empty or any pointer is invalid, nothing happens.
- * The first node of from_stack is removed and becomes the new head of to_stack.
+ * This function removes the first node from the stack pointed to by
+ * 'from_stack' and inserts it at the front of the stack pointed to by
+ * 'to_stack'. It updates both stack pointers accordingly.
  *
- * Example:
- *     from_stack: [5, 6], to_stack: [2, 1]
- *     After push_stack: from_stack: [6], to_stack: [5, 2, 1]
- */
+ * By transferring the top element 
+ * from one stack to another, it enables reordering of elements. */
 void	push_stack(t_stack_node **from_stack, t_stack_node **to_stack)
 {
 	t_stack_node	*node_to_move;
@@ -58,16 +57,17 @@ void	push_stack(t_stack_node **from_stack, t_stack_node **to_stack)
 	*to_stack = node_to_move;
 }
 
-/**
- * rotate_stack - Moves the top element of the stack to the bottom.
- * @stack_head: Pointer to the head of the stack.
+/* Rotates the stack by moving the first element to the end.
  *
- * If the stack has fewer than two elements, nothing happens.
- * The head becomes the last node, and the second node becomes the new head.
+ * This function takes the head of the stack (a linked list) and moves 
+ * the first node to the end. It first checks if the stack is empty or 
+ * has only one node, in which case no rotation is needed.
  *
- * Example:
- *     Input stack: [1, 2, 3] → After rotate_stack: [2, 3, 1]
- */
+ * The rotation is achieved by saving the old head, updating the head
+ * pointer to the second node, and detaching the old head by setting
+ * its next pointer to NULL. Then, it traverses the list to find the 
+ * tail and attaches the old head to the end. This operation is key in
+ * the push_swap project for repositioning elements efficiently. */
 void	rotate_stack(t_stack_node **stack_head)
 {
 	t_stack_node	*old_head;
@@ -84,31 +84,35 @@ void	rotate_stack(t_stack_node **stack_head)
 	current_tail->next = old_head;
 }
 
-/**
- * reverse_rotate_stack - Moves the last element of the stack to the top.
- * @stack_head: Pointer to the head of the stack.
+/* Reverse rotates the stack.
  *
- * If the stack has fewer than two elements, nothing happens.
- * The last node becomes the new head, and all other elements shift down.
- *
- * Example:
- *     Input stack: [1, 2, 3] → After reverse_rotate_stack: [3, 1, 2]
+ * This function moves the last node of the linked list to the front,
+ * effectively performing a reverse rotation on the stack.
+ * 
+ * The algorithm first checks if the stack is empty or has only one
+ * element, in which case no rotation is needed. It then traverses the
+ * list to locate the last node and its predecessor. The predecessor's
+ * next pointer is set to NULL to detach the last node from its original
+ * position. Afterwards, the last node is linked to the front of the list
+ * by setting its next pointer to the previous head, and the head pointer
+ * is updated accordingly. This operation is critical in the push_swap
+ * algorithm to reposition elements efficiently and reduce overall moves.
  */
 void	reverse_rotate_stack(t_stack_node **stack_head)
 {
-	t_stack_node	*second_last_node;
+	t_stack_node	*previous_node;
 	t_stack_node	*last_node;
 
 	if (!stack_head || !*stack_head || !(*stack_head)->next)
 		return ;
-	second_last_node = NULL;
+	previous_node = NULL;
 	last_node = *stack_head;
 	while (last_node->next)
 	{
-		second_last_node = last_node;
+		previous_node = last_node;
 		last_node = last_node->next;
 	}
-	second_last_node->next = NULL;
+	previous_node->next = NULL;
 	last_node->next = *stack_head;
 	*stack_head = last_node;
 }

@@ -12,42 +12,47 @@
 
 #include "push_swap.h"
 
-/*
-** merge_arrays:
-** Merges two sorted subarrays->from 'left' to 'mid' and from 'mid+1' to 'right'
-** into a temporary array 'arr_temp', preserving sorted order.
-** Does not modify the original 'array' directly; instead, it builds the merged
-** result in 'arr_temp'.
-*/
+/* Merges two sorted subarrays into a temporary array.
+ *   - left_index: Traverses the left subarray (from limits.left to limits.mid).
+ *   - right_index: Traverses the right subarray (from limits.mid+1 to limits.right).
+ *   - merged_index: Tracks the current position in the temporary array.
+ *
+ * It compares elements from both subarrays and copies the smaller one 
+ * into arr_temp until one subarray is exhausted, then copies any remaining elements.
+ */
 static void	merge_arrays(int *array, int *arr_temp, t_range_limits limits)
 {
-	int	i;
-	int	j;
-	int	k;
+	int	left_index;
+	int	right_index;
+	int	merged_index;
 
-	i = limits.left;
-	j = limits.mid + 1;
-	k = limits.left;
-	while (i <= limits.mid && j <= limits.right)
+	left_index = limits.left;
+	right_index = limits.mid + 1;
+	merged_index = limits.left;
+	while (left_index <= limits.mid && right_index <= limits.right)
 	{
-		if (array[i] <= array[j])
-			arr_temp[k++] = array[i++];
+		if (array[left_index] <= array[right_index])
+			arr_temp[merged_index++] = array[left_index++];
 		else
-			arr_temp[k++] = array[j++];
+			arr_temp[merged_index++] = array[right_index++];
 	}
-	while (i <= limits.mid)
-		arr_temp[k++] = array[i++];
-	while (j <= limits.right)
-		arr_temp[k++] = array[j++];
+	while (left_index <= limits.mid)
+		arr_temp[merged_index++] = array[left_index++];
+	while (right_index <= limits.right)
+		arr_temp[merged_index++] = array[right_index++];
 }
 
-/*
-** copy_arr_arr_temp_to_array:
-** Copies the sorted segment from the temporary array 'arr_arr_temp'
-** back to the original array 'array', only between the given indices
-** 'left' and 'right'. This reflects the sorted order permanently in
-** the original input.
-*/
+/* Copies a segment from the temporary array
+ * back to the original array.
+ *
+ * This function iterates over the indices from limits.left to 
+ * limits.right (inclusive) and copies each element from arr_temp 
+ * into the original array.
+ *
+ * In the merge sort algorithm, after merging sorted segments into 
+ * a temporary array, it is necessary to update the original array 
+ * so that it reflects the newly sorted order. This helper function 
+ * ensures that only the specified segment is overwritten.*/
 static void	copy_temp_to_array(int *array, int *arr_temp,
 										t_range_limits limits)
 {
@@ -61,13 +66,23 @@ static void	copy_temp_to_array(int *array, int *arr_temp,
 	}
 }
 
-/*
-** merge_sort_recursive:
-** Recursive implementation of the Merge Sort algorithm.
-** It divides the array into two halves, recursively sorts each half,
-** then merges the sorted halves into a temporary array.
-** Finally, it copies the result back into the original array.
-*/
+/* Recursively sorts a segment of an array.
+ *
+ * This function uses the classic divide-and-conquer strategy of merge sort.
+ * It splits the array segment defined by limits.left and limits.right into
+ * two halves by calculating the midpoint. It then recursively sorts the left
+ * half and the right half. After both halves are sorted, it merges them using
+ * merge_arrays and copies the sorted segment back to the original array via
+ * copy_temp_to_array.
+ *
+ * This implementation of merge sort exemplifies the power of recursion in
+ * breaking down a large problem into smaller, manageable subproblems. By
+ * repeatedly dividing the array into two halves, the function ensures that
+ * each recursive call handles a smaller portion of the data until reaching
+ * the base case (a segment with one or zero elements). The merge step then
+ * efficiently combines these sorted segments, maintaining the overall order.
+ * This approach, with its O(n log n) complexity, is widely used due to its
+ * predictable performance even on large datasets.*/
 static void	merge_sort_recursive(int *array, int *arr_temp,
 								t_range_limits limits)
 {
