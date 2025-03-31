@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:08:33 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/31 21:25:09 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/31 23:29:21 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	perform_sorting(t_stack_node **stack_a, t_stack_node **stack_b,
 		ultra_chunk_sort(stack_a, stack_b, size);
 	else
 		hybrid_sort(stack_a, stack_b);
-	if (is_sorted_and_empty(*stack_a, *stack_b))
+	if (is_sorted(*stack_a) && is_sorted(*stack_b))
 	{
 		free_stack(*stack_a);
 		return ;

@@ -13,13 +13,14 @@
 #include "push_swap.h"
 
 /* Merges two sorted subarrays into a temporary array.
- *   - left_index: Traverses the left subarray (from limits.left to limits.mid).
- *   - right_index: Traverses the right subarray (from limits.mid+1 to limits.right).
- *   - merged_index: Tracks the current position in the temporary array.
+ *- left_index: Traverses the left subarray (from limits.left to limits.mid).
+ *- right_index: Traverses the right subarray
+ 		(from limits.mid+1 to limits.right).
+ *- merged_index: Tracks the current position in the temporary array.
  *
  * It compares elements from both subarrays and copies the smaller one 
- * into arr_temp until one subarray is exhausted, then copies any remaining elements.
- */
+ * into arr_temp until one subarray is exhausted, then copies 
+ * any remaining elements.*/
 static void	merge_arrays(int *array, int *arr_temp, t_range_limits limits)
 {
 	int	left_index;

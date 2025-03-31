@@ -6,12 +6,22 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 00:24:44 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/31 23:09:32 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/01 00:37:16 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/* Determines the rotation direction and count.
+ *
+ * If the position is in the second half of the stack, it is more
+ * efficient to use reverse rotations. In that case, the direction is
+ * set to -1 and the number of rotations is calculated as 
+ * (size - pos). Otherwise, the direction is set to 1 (normal rotation)
+ * and the number of rotations equals pos.
+ *
+ * This function helps minimize the total moves by choosing the shorter 
+ * rotation path.*/
 void	set_rotations(int pos, int size, int *direction, int *rotations)
 {
 	if (pos > size / 2)
@@ -26,6 +36,14 @@ void	set_rotations(int pos, int size, int *direction, int *rotations)
 	}
 }
 
+/* Computes the move cost for shifting a node
+ * from stack_a to its correct position in stack_b.
+ *
+ * It calculates the sizes of both stacks, the distance of the node 
+ * from the top of stack_a, and the target position in stack_b.
+ * Then, it uses set_rotations() to determine the rotation count
+ * and direction for each stack. The total cost is the sum of the 
+ * rotations required.*/
 void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
 								t_stack_node *node, t_cost *cost)
 {
@@ -43,19 +61,31 @@ void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
 	cost->total_moves = cost->rotations_a + cost->rotations_b;
 }
 
-
+/* Update the target if a better move is found.
+ *
+ * This function iterates through stack 'a' and checks if a node's
+ * index is within the current chunk range (from
+ * chunk_limit - chunk_size to chunk_limit). For each node in the range,
+ * it calculates the move cost using calculate_move_cost(). If the cost
+ * is lower than the current target's cost, the target info is updated.
+ * If a node requires zero rotations on both stacks, the search stops.
+ *
+ * This selection process helps minimize the total number of moves by
+ * choosing the node with the lowest cost. It is a critical step in
+ * optimizing the overall sorting process in push_swap.
+ */
 void	update_if_better_target(t_stack_node **a, t_stack_node **b,
-							int chunk_limit, t_target_info *target,
-							int	chunk_size)
+		t_chunk_info chunk, t_target_info *target)
 {
 	t_stack_node	*curr;
 	t_cost			cost;
 	int				penalized_moves;
-	
+
 	curr = *a;
 	while (curr)
 	{
-		if(curr->index >= chunk_limit - chunk_size && curr->index < chunk_limit)
+		if (curr->index >= chunk.limit - chunk.size
+			&& curr->index < chunk.limit)
 		{
 			calculate_move_cost(a, b, curr, &cost);
 			penalized_moves = cost.total_moves;
@@ -90,19 +120,17 @@ void	update_if_better_target(t_stack_node **a, t_stack_node **b,
  * cost to determine the optimal move.
  * By adjusting the chunk_limit dynamically, the algorithm efficiently 
  * handles varying distributions of elements in stack 'a'. */
-static void	move_chunks(t_stack_node **a, t_stack_node **b, int chunk_size)
+void	move_chunks(t_stack_node **a, t_stack_node **b, t_chunk_info chunk)
 {
 	t_target_info	target;
-	int				chunk_limit;
 
-	chunk_limit = chunk_size;
 	while (*a)
 	{
 		init_target_info(&target);
-		update_if_better_target(a, b, chunk_limit, &target, chunk_size);
+		update_if_better_target(a, b, chunk, &target);
 		if (!target.node)
 		{
-			chunk_limit += chunk_size;
+			chunk.limit += chunk.size;
 			continue ;
 		}
 		execute_combo_move(a, b, target.cost);
@@ -131,18 +159,19 @@ static void	move_chunks(t_stack_node **a, t_stack_node **b, int chunk_size)
  * more elements, ultra_chunk_sort is employed.*/
 void	hybrid_sort(t_stack_node **a, t_stack_node **b)
 {
-	int		size;
-	int		chunk_size;
+	int				size;
+	t_chunk_info	chunk;
 
 	if (is_sorted(*a))
 		return ;
 	size = stack_size(*a);
-	if (size >= 6 && size <= 100 )
-		chunk_size = size / 5.5;
+	if (size >= 6 && size <= 100)
+		chunk.size = size / 5.5;
 	else
-		chunk_size = 12;
-	move_chunks(a, b, chunk_size);
-	if (is_stack_b_sorted(*b))
+		chunk.size = 12;
+	chunk.limit = chunk.size;
+	move_chunks(a, b, chunk);
+	if (is_sorted(*b))
 	{
 		while (*b)
 			pa(b, a);

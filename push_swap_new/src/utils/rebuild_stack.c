@@ -6,12 +6,21 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:55:20 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/31 21:13:30 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/03/31 23:28:01 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/* Finds the position of the node with the maximum index in the stack.
+ *
+ * This function iterates through the linked list 'stack', and for each
+ * node it compares the node's index to the current maximum (stored in
+ * *max_index). It updates *max_index and the corresponding position
+ * (max_pos) when a higher index is found.
+ *
+ * It returns the zero-based position (max_pos) of the node with the
+ * highest index.*/
 static int	find_max_position(t_stack_node *stack, int *max_index)
 {
 	int				pos;
@@ -35,6 +44,18 @@ static int	find_max_position(t_stack_node *stack, int *max_index)
 	return (max_pos);
 }
 
+/* Rebuilds stack 'a' by moving elements from stack 'b'.
+ *
+ * This function repeatedly finds the element with the maximum index in
+ * stack 'b' (using find_max_position) and rotates stack 'b' to bring it
+ * to the top. It chooses the optimal rotation direction (normal or reverse)
+ * based on the position of the maximum element. Once the maximum element
+ * is at the top, it is pushed to stack 'a' using pa(). This process repeats
+ * until stack 'b' is empty.
+ *
+ * This operation is critical in reassembling the sorted stack 'a' from the
+ * auxiliary stack 'b'. By always moving the maximum element from 'b' back
+ * to 'a', the algorithm ensures that the final order in 'a' is correct. */
 void	rebuild_stack_a(t_stack_node **a, t_stack_node **b)
 {
 	int	max_index;
