@@ -12,86 +12,66 @@
 
 #include "push_swap.h"
 
-
-static void	free_split(char **split)
+/* Process a single input token and add it to the stack.
+ *
+ * This function converts a token (a string) into a number and performs
+ * several checks before adding it to the stack:
+ *   1. Verifies the token is a valid number using is_number().
+ *   2. Converts the token to a long integer using ft_atol().
+ *   3. Checks that the number is within the range of an int.
+ *   4. Checks for duplicates in the current stack.
+ *   5. Adds the number to the stack using create_stack().
+ *
+ * This helper ensures that only valid, unique numbers within the proper
+ * range are added to the stack. It protects the sorting algorithm from
+ * corrupt or invalid data by terminating the program if any check fails.
+ */
+static void	process_token(char *token, t_stack_node **stack)
 {
-	int	i;
+	long	num;
 
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+	if (!is_number(token))
+		exit_error();
+	num = ft_atol(token);
+	if (num > INT_MAX || num < INT_MIN)
+		exit_error();
+	if (has_duplicates(*stack, (int)num))
+		exit_error();
+	create_stack(stack, (int)num);
 }
 
-static int	is_number(char *str)
-{
-	int	i;
-
-	if (!str || !str[0])
-		return (0);
-	i = 0;
-	if (str[0] == '-' || str[0] == '+')
-		i++;
-	if (!str[i]) // es: "+" o "-" da soli
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static int	has_duplicates(t_stack_node *stack, int value)
-{
-	while (stack)
-	{
-		if (stack->value == value)
-			return (1);
-		stack = stack->next;
-	}
-	return (0);
-}
-
-void	exit_error(void)
-{
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
-
+/*Validates and processes command-line input.
+ *
+ * This function iterates over each command-line argument (except the
+ * program name), splits the argument into tokens using spaces as
+ * delimiters, and then processes each token. Each token is converted
+ * to an integer and added to the stack. If any error occurs (e.g.,
+ * invalid token, empty token array), the program terminates with an
+ * error.
+ *This input validation step is critical for ensuring that only
+ * proper numeric values are processed by the sorting routines.
+ * It prevents the introduction of duplicates and non-numeric
+ * characters into the stack, thereby maintaining the integrity
+ * of the data before sorting begins.*/
 void	validate_input(char **av, int ac, t_stack_node **stack)
 {
-	int		i, j;
+	int		i;
+	int		j;
 	char	**tokens;
-	long	num;
 
 	i = 1;
 	while (i < ac)
 	{
 		tokens = ft_split(av[i], ' ');
-		if (!tokens)
+		if (!tokens || !tokens[0])
 			exit_error();
 		j = 0;
 		while (tokens[j])
 		{
-			if (!is_number(tokens[j]))
-				exit_error();
-			num = ft_atol(tokens[j]);
-			if (num > INT_MAX || num < INT_MIN)
-				exit_error();
-			if (has_duplicates(*stack, (int)num))
-				exit_error();
-			create_stack(stack, (int)num);
+			process_token(tokens[j], stack);
 			j++;
 		}
-		free_split(tokens); // libera ogni stringa e poi l'array
+		free_split(tokens);
 		i++;
 	}
 }
-
