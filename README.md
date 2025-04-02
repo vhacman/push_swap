@@ -32,7 +32,7 @@
 | stack_check.c | Verifica ordinamento e stato finale |
 
 #### Tecnologie utilizzate
-- Linguaggio: C (C99)
+- Linguaggio: C
 - Compilatore: GCC
 - Sistema: Unix/Linux
 - Strutture dati: liste collegate
@@ -43,9 +43,109 @@
 ## 2. Funzionamento degli algoritmi
 
 ### Merge Sort (per assegnare indici)
-- Funzione: `merge_sort(array, size)`
-- Scopo: ordinare una copia temporanea dello stack per assegnare a ciascun valore un indice crescente.
-- Complessità: **Tempo O(n log n)**, **Spazio O(n)**
+1. Descrizione dell'algoritmo
+Merge Sort è un algoritmo di ordinamento basato sul paradigma divide et impera (divide and conquer).
+
+Scopo
+Ordinare un array di interi in ordine crescente (può essere adattato anche per decrescente).
+
+Problema che risolve
+È particolarmente utile per ordinare array di grandi dimensioni in modo efficiente e stabile, con una complessità prevedibile.
+
+🔁 2. Passaggi dell'algoritmo
+L'algoritmo può essere suddiviso in tre fasi principali:
+
+a) Divide (Dividi)
+Si divide ricorsivamente l’array in due metà fino ad arrivare a sotto-array di un solo elemento.
+
+b) Conquer (Risolve)
+Si ordinano i sotto-array più piccoli (che sono già ordinati perché composti da un solo elemento).
+
+c) Combine (Combina)
+Si fondono i sotto-array ordinati in array più grandi ordinati.
+
+🔍 3. Logica dell’algoritmo
+Funzione: merge_sort
+c
+Copia
+Modifica
+void merge_sort(int *array, int size)
+Alloca un array temporaneo arr_temp della stessa dimensione dell’array originale.
+
+Inizializza i limiti sinistro (left = 0) e destro (right = size - 1).
+
+Avvia la ricorsione tramite merge_sort_recursive.
+
+Funzione: merge_sort_recursive
+c
+Copia
+Modifica
+static void merge_sort_recursive(int *array, int *arr_temp, t_range_limits limits)
+Se il segmento ha più di un elemento (left < right), calcola il punto medio mid.
+
+Richiama sé stessa per l’intervallo sinistro [left, mid] e destro [mid+1, right].
+
+Dopo le due ricorsioni, esegue merge_arrays per unire i due sotto-array ordinati.
+
+Copia il risultato da arr_temp ad array con copy_temp_to_array.
+
+Funzione: merge_arrays
+c
+Copia
+Modifica
+static void merge_arrays(int *array, int *arr_temp, t_range_limits limits)
+Confronta gli elementi dei due sotto-array (left...mid e mid+1...right) e li unisce in ordine crescente in arr_temp.
+
+Funzione: copy_temp_to_array
+c
+Copia
+Modifica
+static void copy_temp_to_array(int *array, int *arr_temp, t_range_limits limits)
+Copia il segmento ordinato da arr_temp ad array (tra left e right).
+
+🧠 4. Esempio di funzionamento
+Input
+c
+Copia
+Modifica
+int array[] = {4, 2, 5, 1, 3};
+merge_sort(array, 5);
+Fasi
+Divide in: [4, 2, 5] e [1, 3]
+
+Divide in: [4] e [2, 5]
+
+Divide [2, 5] in: [2] e [5]
+
+Unisce [2] + [5] → [2, 5]
+
+Unisce [4] + [2, 5] → [2, 4, 5]
+
+Divide [1, 3] in: [1] e [3] → Unisce → [1, 3]
+
+Unisce [2, 4, 5] + [1, 3] → [1, 2, 3, 4, 5]
+
+Output
+c
+Copia
+Modifica
+array = {1, 2, 3, 4, 5};
+📈 5. Analisi della complessità
+Tipo di complessità	Valore
+Temporale	O(n log n)
+Spaziale	O(n) (per l'array temporaneo)
+O(log n) per la profondità della ricorsione (divisioni)
+
+O(n) per ogni livello (fusione degli array)
+
+🛠 6. Applicazioni dell’algoritmo
+Ordinamento di grandi dataset
+
+Ordinamenti stabili (mantiene l’ordine degli elementi uguali)
+
+Ordinamenti in ambiente multithread (la divisione è parallelizzabile)
+
+Utilizzato come base per algoritmi di sorting ibridi (come il tuo Hybrid Sort)
 
 ### Mini Sort (fino a 5 numeri)
 - File: `mini_sort_a.c`
