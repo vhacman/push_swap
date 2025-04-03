@@ -270,6 +270,52 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 Questo diagramma illustra il flusso logico dell’algoritmo `mini_sort`
 
 ![Mini Sort Flowchart](mini_sort_flowchart.png)
+---
+
+## Ultra Chunk Sort
+
+L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente **grandi stack** (tipicamente 500 elementi), suddividendoli in **chunk** più piccoli e gestendoli strategicamente.
+
+🔹 L'obiettivo è minimizzare il numero di operazioni dividendo i dati in blocchi gestibili e organizzando lo stack `b` per una ricostruzione ordinata e ottimale dello stack `a`.
+
+---
+
+### 🧠 Strategia generale
+
+1. 🔢 **Chunking**: lo stack `a` viene suddiviso in gruppi di valori in base all’indice.
+2. 📤 `push_chunks_to_b()`:
+   - Se l’indice è sotto la soglia (`current_chunk_limit`) → `pb`
+   - Se è nella metà inferiore del chunk → `rb` (rotazione `b` per tenerlo basso)
+   - Altrimenti → `ra` (rotazione `a` per cercare altri candidati)
+   - Ogni volta che `b` supera la soglia → aumenta `chunk_limit`
+3. 📥 `move_max_to_a()`:
+   - Trova il valore massimo in `b` → ruota `b` in modo ottimale (`rb` / `rrb`)
+   - Sposta il massimo in `a` con `pa`
+   - Ripeti finché `b` è vuoto
+
+---
+
+### 🔢 Chunk size dinamico
+
+📏 Calcolato come `total_size / 9`, testato sperimentalmente per massimizzare efficienza e minimizzare mosse.
+
+---
+
+### 🧭 Diagramma a Blocchi – Ultra Chunk Sort
+
+![Ultra Chunk Sort Flowchart](./ultra_chunk_sort_flowchart.png)
+
+---
+
+### 📁 Moduli coinvolti
+
+📂 `ultra_chunk_sort.c`
+
+- `ultra_chunk_sort()` → funzione principale
+- `push_chunks_to_b()` → suddivisione in blocchi e push in `b`
+- `move_max_to_a()` → ricostruzione dello stack `a`
+- `find_max_index()` / `find_position()` → utilità per la gestione rotazioni
+
 # Esempio di utilizzo
 
 Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
