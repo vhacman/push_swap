@@ -38,15 +38,36 @@ Per numeri di piccole dimensioni si impiegano algoritmi semplificati (come in mi
 
 ## Esecuzione delle Operazioni:
 Le funzioni implementate per eseguire operazioni di base (swap, push, rotate, reverse rotate) e le loro versioni doppie (in stack_double_operations.c e double_operations.c) manipolano le pile per spostare e ordinare gli elementi.
+---
+# Obiettivi
+---
+# Architettura del Progetto
 
+| File                        | Responsabilità                          |
+|-----------------------------|------------------------------------------|
+| `main.c`                    | Inizializzazione e sorting               |
+| `validate_input.c`          | Parsing e validazione degli input        |
+| `assign_indices.c`          | Assegnazione indici ordinati             |
+| `merge_algorithm.c`         | Merge sort su array temporaneo           |
+| `mini_sort_a.c`             | Ordinamento di piccoli input (≤5)        |
+| `hybrid_sort.c`             | Strategia ibrida per input medi(6 -499     |
+| `ultra_chunk_sort.c`        | Strategia ottimizzata per 500+ numeri     |
+| `cost_utils.c`              | Calcolo del costo di ogni possibile mossa|
+| `execute_optimal_moves.c`   | Esecuzione combinata delle mosse         |
+| `stack_operations.c`        | Operazioni su stack reali (`sa`, `pb`, …)|
+| `operations.c`              | Operazioni su array fittizi              |
+| `stack_utils.c`             | Utility per gestione e conversione stack |
+| `stack_check.c`             | Verifica ordinamento finale              |
+| `debug.c`                   | Debugging visuale degli stack            |
 
 ---
+---
 
-## Esempio di utilizzo
+# Esempio di utilizzo
 Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
 ---
 
-## Contatti
+# Contatti
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/viorica-gabriela-hacman-63a412267/)
 [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/profile.php?id=100090802467237)
