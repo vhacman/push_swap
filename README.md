@@ -93,77 +93,118 @@ push_swap/
 L'algoritmo usa un approccio "ibrido" che adatta la strategia in base alla dimensione dell’input:
 
 🔹 Insiemi piccoli (≤ 5 elementi): viene usato un ordinamento diretto (mini_sort).
-
 🔸 Insiemi medio-piccoli (da 6 a 499 elementi): entra in gioco hybrid_sort, che lavora a chunk.
 
 L'idea è quella di suddividere lo stack in gruppi (chunk) e spostare gli elementi da stack_a a stack_b in modo ottimizzato, calcolando per ciascun elemento il costo minimo di spostamento.
-
+---
   ## 📊 Calcolo dei costi e scelta del movimento migliore
   
 Per minimizzare le mosse, l’algoritmo calcola per ogni elemento:
-
 📍 Distanza dalla cima dello stack → calcolata con distance_to_top()
-
 🎯 Posizione ideale nello stack B → trovata con find_target_position_b()
-
 🔁 Direzione e numero di rotazioni → determinati da set_rotations(), che decide se usare rotazioni normali (ra, rb) o inverse (rra, rrb) in base alla posizione
-
 🔎 La funzione calculate_move_cost() utilizza queste informazioni per calcolare il costo totale (in numero di operazioni) per spostare ogni elemento.
-
 🎯 Aggiornamento del target e spostamento ottimale
-
+---
 La funzione update_if_better_target():
-
 Scorre lo stack_a
-
 Analizza solo gli elementi con indice entro il limite del chunk corrente
-
 Calcola il costo per ciascuno
-
+---
 ## 📈 Aggiorna il target da spostare se trova un'opzione più economica in termini di mosse
-
 Una volta scelto il candidato ottimale, viene chiamata execute_combo_move():
-
 🔄 Esegue le rotazioni necessarie su entrambi gli stack
-
 📤 Sposta l’elemento da a a b (pb)
-
 🔁 La funzione move_chunks() gestisce l’intero ciclo:
-
 Finché a non è vuoto, cerca e sposta i migliori candidati
-
 Se il chunk corrente non contiene elementi validi, aumenta il limite per ampliare la ricerca
 🧱 Ricomposizione e operazioni di base
-
 Dopo aver popolato stack_b:
 ✅ Se stack_b è già ordinato, viene svuotato in a con pa, seguito da una rotazione finale con final_rotate_a()
-
 🔁 Altrimenti, viene utilizzata rebuild_stack_a() per reinserire gli elementi in a partendo dal più grande, seguita sempre da final_rotate_a()
-
+---
 ## ⚙️ Operazioni fondamentali
 Le operazioni di base sono implementate in logic_operations.c e agiscono direttamente sugli array che rappresentano gli stack:
-
 🔄 swap: scambia i primi due elementi
-
 📤 push: sposta il primo elemento da uno stack all’altro
-
 🔃 rotate: porta il primo elemento in fondo allo stack
-
 🔁 reverse_rotate: porta l’ultimo elemento in cima
-
 Inoltre, double_logic_operations.c contiene operazioni "doppie" che agiscono contemporaneamente su entrambi gli stack, ottimizzando le rotazioni:
-
 🔁 rr: ra + rb
-
 🔃 rrr: rra + rrb
-
 🔀 ss: sa + sb
-
+---
 Questo diagramma illustra il flusso logico dell’algoritmo `hybrid_sort`, dalla scelta iniziale fino alla ricostruzione dello stack A:
 
 ![Hybrid Sort Flowchart](hybrid_sort_flowchart.png)
 ---
+
 ## Merge Sort
+
+L'algoritmo **Merge Sort** viene utilizzato in `push_swap` per **ordinare un array temporaneo** e assegnare correttamente gli **indici ordinati** agli elementi dello stack.
+
+🔹 È un algoritmo ricorsivo basato sulla strategia **divide et impera**.
+
+---
+
+### 🔁 Suddivisione ricorsiva e fusione
+
+- ✂️ Divide l’array in due metà
+- 🔁 Applica ricorsione su entrambe
+- 🔗 `merge_arrays()` → fonde due sottosequenze ordinate
+- 🧾 `copy_temp_to_array()` → aggiorna il segmento ordinato nell’array principale
+
+---
+
+### 🔀 Fusione degli array ordinati
+
+- 📍 Confronta due sottosequenze ordinate
+- 🧩 Inserisce i valori in `arr_temp`
+- 📦 Copia i rimanenti una volta terminato uno dei segmenti
+
+---
+
+### 📥 Copia nel vero array
+
+- 📤 Copia ordinata da `arr_temp` a `array`
+- 🧼 Modifica solo il segmento in questione
+
+---
+
+### 🚪 Ingresso nell’algoritmo
+
+- 🧠 `merge_sort()` è l’entry point
+- 🔧 Alloca `arr_temp`
+- 📞 Avvia la ricorsione
+- 🗑 Libera la memoria alla fine
+
+---
+
+### 📌 Esempio pratico
+
+```c
+int array[] = {4, 2, 5, 1, 3};
+merge_sort(array, 5);
+```
+
+Risultato: `[1, 2, 3, 4, 5]`
+
+---
+
+### ⏱️ Complessità
+
+- ⏳ Tempo: O(n log n)
+- 📦 Spazio: O(n)
+
+---
+
+### 📁 Moduli coinvolti
+
+- `merge_algorithm.c`
+  - `merge_sort()`
+  - `merge_sort_recursive()`
+  - `merge_arrays()`
+  - `copy_temp_to_array()`
 ---
 # Esempio di utilizzo
 Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
