@@ -88,6 +88,7 @@ push_swap/
 ```
 ---
 # Algoritmi principali
+
 ## Hybrid Sort
 L'algoritmo usa un approccio "ibrido" che adatta la strategia in base alla dimensione dell’input:
 
@@ -158,6 +159,11 @@ Inoltre, double_logic_operations.c contiene operazioni "doppie" che agiscono con
 
 🔀 ss: sa + sb
 
+Questo diagramma illustra il flusso logico dell’algoritmo `hybrid_sort`, dalla scelta iniziale fino alla ricostruzione dello stack A:
+
+![Hybrid Sort Flowchart](./docs/hybrid_sort_flowchart.png)
+---
+## Merge Sort
 ---
 # Esempio di utilizzo
 Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
