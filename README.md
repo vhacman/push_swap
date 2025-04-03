@@ -196,6 +196,10 @@ Risultato: `[1, 2, 3, 4, 5]`
   - `merge_sort_recursive()`
   - `merge_arrays()`
   - `copy_temp_to_array()`
+
+Questo diagramma illustra il flusso logico dell’algoritmo `merge_sort`
+
+![Merge Sort Flowchart](merge_sort_flowchart.png)
 ---
 
 # Esempio di utilizzo
