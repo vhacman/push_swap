@@ -6,5 +6,5 @@
 [![Memory Leak Free](https://img.shields.io/badge/Leaks-Free-success?style=for-the-badge)](https://valgrind.org/)  
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Unix-lightgrey)
 ![License](https://img.shields.io/badge/license-42%20Project-informational)
-![Status](https://img.shields.io/badge/status-Completed-brightgreen)
+![Status](https://img.shields.io/badge/42%20status-Completed-brightgreen)
 ---
