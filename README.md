@@ -19,7 +19,6 @@
   - [🔧 Mini Sort](#mini-sort)
   - [🚀 Ultra Chunk Sort](#ultra-chunk-sort)
 - [🛠️ Funzioni Principali](#funzioni-principali)
-- [🎬 Esempio di Utilizzo](#esempio-di-utilizzo)
 - [🛠️ Build](#build)
 - [📝 Licenza](#licenza)
 - [🧑‍💻 Contatti](#contatti)
@@ -309,16 +308,23 @@ L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente
 - `move_max_to_a()` → ricostruzione dello stack `a`
 - `find_max_index()` / `find_position()` → utilità per la gestione rotazioni
 
-# Esempio di utilizzo
-
-Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
-
 ---
+## Funzioni Principali
+
+- `validate_input()` → parsing e controllo argomenti
+- `merge_sort()` → ordina array temporaneo
+- `assign_indices()` → assegna index da array ordinato a nodi
+- `mini_sort_a()`, `hybrid_sort()`, `ultra_chunk_sort()` → sorting
+- `execute_combo_move()` → push ottimizzato con `rr` / `rrr`
+- `rotate_both()` / `rotate_individual()` → rotazioni combinate
+- `rebuild_stack_a()` → ricostruisce a in ordine da b
+- `final_rotate_a()` → ruota a per mettere index 0 in cima
 
 ## Build
 
 ```bash
 make            # compila push_swap
+make re         # ricompila da capo 
 make clean      # rimuove .o
 make fclean     # rimuove .o e binario
 make check      # manda in run checker_linux (da implementare dopo l'evaluation)
