@@ -312,7 +312,7 @@ make valgrind   # check su memory leak
 ```
 ## SORTING
 
-![Esempio di ordinamento per 100 numeri](giphy.mp4)
+![Esempio di ordinamento per 100 numeri](push_swap.gif)
 
 # Contatti
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/viorica-gabriela-hacman-63a412267/)
