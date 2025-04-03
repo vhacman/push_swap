@@ -9,9 +9,6 @@
 ![Status](https://img.shields.io/badge/42%20status-Completed-brightgreen)
 ---
 
-
->**Push_swap** è un progetto della 42School che consiste nell'ordinare una lista di numeri interi utilizzando due stack (A e B) e un set limitato di operazioni, il tutto cercando di minimizzare il numero di mosse.
-
 ## 📚 Indice
 - [📖 Descrizione](#descrizione)
 - [🎯 Obiettivi](#obiettivi)
@@ -27,3 +24,9 @@
 - [📫 Contatti](#contatti)
 ---
 
+## Descrizione
+L’obiettivo principale è scrivere un programma che, dato un input con numeri interi (stack a) e partendo da uno stack b vuoto, calcoli e visualizzi la sequenza minima di operazioni necessarie per ordinare stack a in ordine ascendente.
+
+
+
+# Esempio di utilizzo
