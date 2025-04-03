@@ -7,6 +7,8 @@
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Unix-lightgrey)
 ![License](https://img.shields.io/badge/license-42%20Project-informational)
 ![Status](https://img.shields.io/badge/42%20status-Completed-brightgreen)
+![Score](https://img.shields.io/badge/Score-     -brightgreen)
+![Created](https://img.shields.io/badge/Created-Marzo_2025-blue)
 ---
 
 ## 📚 Indice
@@ -22,7 +24,7 @@
 - [🧑‍💻 Contatti](#contatti)
 ---
 # Descrizione
-L’obiettivo principale è scrivere un programma che, dato un input con numeri interi (stack a) e partendo da uno stack b vuoto, calcoli e visualizzi la sequenza minima di operazioni necessarie per ordinare stack a in ordine ascendente.
+L’obiettivo principale è scrivere un programma che, dato un input con numeri interi (stack a) e partendo da uno stack b vuoto, calcoli e visualizzi la     sequenza minima di operazioni necessarie per ordinare stack a in ordine ascendente.
 
 ## Input e Validazione:
 Il programma riceve una lista di numeri interi come argomenti e, attraverso funzioni dedicate (come quelle viste in validate_input.c), verifica la correttezza dell’input, gestendo errori quali valori non numerici, duplicati o numeri fuori dai limiti.
