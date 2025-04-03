@@ -161,7 +161,7 @@ Inoltre, double_logic_operations.c contiene operazioni "doppie" che agiscono con
 
 Questo diagramma illustra il flusso logico dell’algoritmo `hybrid_sort`, dalla scelta iniziale fino alla ricostruzione dello stack A:
 
-![Hybrid Sort Flowchart](./docs/hybrid_sort_flowchart.png)
+![Hybrid Sort Flowchart](hybrid_sort_flowchart.png)
 ---
 ## Merge Sort
 ---
