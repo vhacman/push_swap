@@ -23,7 +23,6 @@
 - [📝 Licenza](#licenza)
 - [🧑‍💻 Contatti](#contatti)
 ---
-
 # Descrizione
 L’obiettivo principale è scrivere un programma che, dato un input con numeri interi (stack a) e partendo da uno stack b vuoto, calcoli e visualizzi la sequenza minima di operazioni necessarie per ordinare stack a in ordine ascendente.
 
@@ -40,6 +39,7 @@ Per numeri di piccole dimensioni si impiegano algoritmi semplificati (come in mi
 Le funzioni implementate per eseguire operazioni di base (swap, push, rotate, reverse rotate) e le loro versioni doppie (in stack_double_operations.c e double_operations.c) manipolano le pile per spostare e ordinare gli elementi.
 ---
 # Obiettivi
+
 ---
 # Architettura del Progetto
 ```bash
@@ -127,7 +127,6 @@ L'idea è quella di suddividere lo stack in gruppi (chunk) e spostare gli elemen
 ### 🧭 Diagramma a Blocchi – Hybrid Sort
 ![Hybrid Sort Flowchart](hybrid_sort_flowchart.png)
 ---
-
 ## Merge Sort
 
 L'algoritmo **Merge Sort** viene utilizzato in `push_swap` per **ordinare un array temporaneo** e assegnare correttamente gli **indici ordinati** agli elementi dello stack.
@@ -135,7 +134,6 @@ L'algoritmo **Merge Sort** viene utilizzato in `push_swap` per **ordinare un arr
 🔹 È un algoritmo ricorsivo basato sulla strategia **divide et impera**.
 
 ---
-
 ### 🔁 Suddivisione ricorsiva e fusione
 
 - ✂️ Divide l’array in due metà
@@ -144,7 +142,6 @@ L'algoritmo **Merge Sort** viene utilizzato in `push_swap` per **ordinare un arr
 - 🧾 `copy_temp_to_array()` → aggiorna il segmento ordinato nell’array principale
 
 ---
-
 ### 🔀 Fusione degli array ordinati
 
 - 📍 Confronta due sottosequenze ordinate
@@ -152,14 +149,12 @@ L'algoritmo **Merge Sort** viene utilizzato in `push_swap` per **ordinare un arr
 - 📦 Copia i rimanenti una volta terminato uno dei segmenti
 
 ---
-
 ### 📥 Copia nel vero array
 
 - 📤 Copia ordinata da `arr_temp` a `array`
 - 🧼 Modifica solo il segmento in questione
 
 ---
-
 ### 🚪 Ingresso nell’algoritmo
 
 - 🧠 `merge_sort()` è l’entry point
@@ -168,7 +163,6 @@ L'algoritmo **Merge Sort** viene utilizzato in `push_swap` per **ordinare un arr
 - 🗑 Libera la memoria alla fine
 
 ---
-
 ### 📌 Esempio pratico
 
 ```c
@@ -179,14 +173,12 @@ merge_sort(array, 5);
 Risultato: `[1, 2, 3, 4, 5]`
 
 ---
-
 ### ⏱️ Complessità
 
 - ⏳ Tempo: O(n log n)
 - 📦 Spazio: O(n)
 
 ---
-
 ### 📁 Moduli coinvolti
 
 - `merge_algorithm.c`
@@ -197,6 +189,7 @@ Risultato: `[1, 2, 3, 4, 5]`
 
 ### 🧭 Diagramma a Blocchi – Merge Sort
 ![Merge Sort Flowchart](merge_sort_flowchart.png)
+
 ---
 ##  Mini Sort
 
@@ -205,7 +198,6 @@ L’algoritmo **Mini Sort** è ottimizzato per gestire input molto piccoli (da 2
 🔹 `mini_sort_a()` applica strategie diverse in base al numero di elementi presenti nello stack A, cercando di minimizzare al massimo il numero di operazioni (`sa`, `ra`, `rra`, `pb`, `pa`).
 
 ---
-
 ### 🧠 Logica decisionale per stack ≤ 3 elementi
 
 La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a`:
@@ -219,7 +211,6 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 - 🔁 Caso 5: il terzo è il più piccolo → `rra`
 
 ---
-
 ### 🔍 Ricerca del valore minimo
 
 `find_position_of_index()`:
@@ -229,7 +220,6 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 ✅ Serve a capire se conviene ruotare `ra` o `rra`
 
 ---
-
 ### 🔁 Rotazione verso la posizione
 
 `rotate_to_position()`:
@@ -238,7 +228,6 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 - 🔁 Ruota indietro (`rra`) se è nella seconda
 
 ---
-
 ### ⚙️ Ordinamento per 4 o 5 elementi
 
 1. 🔄 Ruota fino a portare il minimo in cima
@@ -248,13 +237,11 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 5. 📥 Riporta da `b` ad `a` con `pa`
 
 ---
-
 ### 🧭 Diagramma a Blocchi – Mini Sort
 
 ![Mini Sort Flowchart](./mini_sort_flowchart.png)
 
 ---
-
 ### 📁 Moduli coinvolti
 
 📂 `mini_sort_a.c`
@@ -271,7 +258,6 @@ L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente
 🔹 L'obiettivo è minimizzare il numero di operazioni dividendo i dati in blocchi gestibili e organizzando lo stack `b` per una ricostruzione ordinata e ottimale dello stack `a`.
 
 ---
-
 ### 🧠 Strategia generale
 
 1. 🔢 **Chunking**: lo stack `a` viene suddiviso in gruppi di valori in base all’indice.
@@ -286,19 +272,16 @@ L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente
    - Ripeti finché `b` è vuoto
 
 ---
-
 ### 🔢 Chunk size dinamico
 
 📏 Calcolato come `total_size / 9`, testato sperimentalmente per massimizzare efficienza e minimizzare mosse.
 
 ---
-
 ### 🧭 Diagramma a Blocchi – Ultra Chunk Sort
 
 ![Ultra Chunk Sort Flowchart](./ultra_chunk_sort_flowchart.png)
 
 ---
-
 ### 📁 Moduli coinvolti
 
 📂 `ultra_chunk_sort.c`
@@ -332,10 +315,8 @@ make valgrind   # check su memory leak
 ```
 
 # Contatti
-
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/viorica-gabriela-hacman-63a412267/)
 [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/profile.php?id=100090802467237)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/_gabriela_aleirbag_/)
 
 ---
-
