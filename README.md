@@ -20,7 +20,7 @@
   - [🚀 Ultra Chunk Sort](#ultra-chunk-sort)
 - [🛠️ Funzioni Principali](#funzioni-principali)
 - [🎬 Esempio di Utilizzo](#esempio-di-utilizzo)
-- [🛠️ Build & flusso di esecuzione](#build)
+- [🛠️ Build](#build)
 - [📝 Licenza](#licenza)
 - [🧑‍💻 Contatti](#contatti)
 ---
