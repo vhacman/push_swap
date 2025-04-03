@@ -254,7 +254,7 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 
 ### 🧭 Diagramma a Blocchi – Mini Sort
 
-![Mini Sort Flowchart](./docs/mini_sort_flowchart.png)
+![Mini Sort Flowchart](./mini_sort_flowchart.png)
 
 ---
 
