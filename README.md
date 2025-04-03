@@ -12,3 +12,18 @@
 
 >**Push_swap** è un progetto della 42School che consiste nell'ordinare una lista di numeri interi utilizzando due stack (A e B) e un set limitato di operazioni, il tutto cercando di minimizzare il numero di mosse.
 
+## 📚 Indice
+- [📖 Descrizione](#descrizione)
+- [🎯 Obiettivi](#obiettivi)
+- [🧩 Architettura del Progetto](#architettura-del-progetto)
+- [🔎 Algoritmi Principali](#algoritmi-principali)
+  - [🧠 Merge Sort](#merge-sort)
+  - [🔧 Mini Sort](#mini-sort)
+  - [🌀 Hybrid Sort](#hybrid-sort)
+  - [🚀 Ultra Chunk Sort](#ultra-chunk-sort)
+- [🛠️ Funzioni Principali](#funzioni-principali)
+- [🎬 Esempio di Utilizzo](#esempio-di-utilizzo)
+- [📝 Licenza](#licenza)
+- [📫 Contatti](#contatti)
+---
+
