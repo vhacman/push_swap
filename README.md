@@ -11,7 +11,6 @@
 
 ## 📚 Indice
 - [📖 Descrizione](#descrizione)
-- [🎯 Obiettivi](#obiettivi)
 - [📁 Architettura del Progetto](#architettura-del-progetto)
 - [🔎 Algoritmi Principali](#algoritmi-principali)
   - [🌀 Hybrid Sort](#hybrid-sort)
@@ -20,7 +19,6 @@
   - [🚀 Ultra Chunk Sort](#ultra-chunk-sort)
 - [🛠️ Funzioni Principali](#funzioni-principali)
 - [🛠️ Build](#build)
-- [📝 Licenza](#licenza)
 - [🧑‍💻 Contatti](#contatti)
 ---
 # Descrizione
@@ -37,9 +35,6 @@ Per numeri di piccole dimensioni si impiegano algoritmi semplificati (come in mi
 
 ## Esecuzione delle Operazioni:
 Le funzioni implementate per eseguire operazioni di base (swap, push, rotate, reverse rotate) e le loro versioni doppie (in stack_double_operations.c e double_operations.c) manipolano le pile per spostare e ordinare gli elementi.
----
-# Obiettivi
-
 ---
 # Architettura del Progetto
 ```bash
