@@ -20,7 +20,7 @@
   - [🚀 Ultra Chunk Sort](#ultra-chunk-sort)
 - [🛠️ Funzioni Principali](#funzioni-principali)
 - [🎬 Esempio di Utilizzo](#esempio-di-utilizzo)
-- [🛠️ Build & flusso di esecuzione](#build-&-flusso-di-esecuzione)
+- [🛠️ Build & flusso di esecuzione](#build)
 - [📝 Licenza](#licenza)
 - [🧑‍💻 Contatti](#contatti)
 ---
@@ -92,9 +92,7 @@ push_swap/
 Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
 ---
 
-## Build & flusso di esecuzione
-
-### 🔧 Build
+## Build
 
 ```bash
 make            # compila push_swap
