@@ -17,7 +17,7 @@
   - [🧠 Merge Sort](#merge-sort)
   - [🔧 Mini Sort](#mini-sort)
   - [🚀 Ultra Chunk Sort](#ultra-chunk-sort)
-- [🛠️ Funzioni Principali](#funzioni-principali)
+- [🔍 Funzioni Principali](#funzioni-principali)
 - [🛠️ Build](#build)
 - [🧑‍💻 Contatti](#contatti)
 ---
