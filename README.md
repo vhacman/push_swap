@@ -95,45 +95,30 @@ Per insiemi piccoli (fino a 5 elementi): viene usato un ordinamento semplice (mi
 Per insiemi medio-piccoli (da 6 a 499 elementi): viene applicato il hybrid_sort che lavora a "chunk".
 L'idea è quella di suddividere lo stack in gruppi (chunk) e spostare gli elementi uno a uno da stack "a" a stack "b" in maniera ottimizzata, calcolando per ciascun elemento il costo (in numero di mosse) per poterlo spostare nella posizione giusta.
 
-  ### Calcolo dei costi e scelta del movimento migliore
+    ## Calcolo dei costi e scelta del movimento migliore
 Per minimizzare le mosse, l’algoritmo calcola per ogni elemento:
-
 La distanza dall'inizio dello stack: si misura con la funzione distance_to_top().
-
 La posizione ideale nell’altro stack (stack "b"): trovata con find_target_position_b().
-
 La direzione e il numero di rotazioni necessarie: la funzione set_rotations() decide se conviene ruotare normalmente o in senso inverso, in base alla posizione dell’elemento (se è nella seconda metà dello stack, conviene usare la reverse rotation).
-
 Queste informazioni vengono usate da calculate_move_cost(), che somma le rotazioni necessarie su entrambi gli stack per determinare il "costo" totale in termini di mosse.
-
-3. Aggiornamento del target e spostamento degli elementi
+   
+    ## Aggiornamento del target e spostamento degli elementi
 La funzione update_if_better_target() scorre lo stack "a" e, per ogni elemento che rientra in un certo intervallo (determinato dal chunk corrente), calcola il costo del movimento. Se trova un elemento che può essere spostato con meno mosse rispetto ad altri, aggiorna il "target" da spostare.
-
 Una volta individuato il target ottimale, execute_combo_move() (che non vediamo il dettaglio qui, ma sappiamo cosa deve fare) esegue le rotazioni necessarie in entrambi gli stack e sposta l’elemento da "a" a "b".
-
 La funzione move_chunks() gestisce questo processo in un ciclo: finché ci sono elementi in "a", viene cercato il miglior candidato da spostare. Se nessun elemento soddisfa i criteri nel chunk corrente, il limite del chunk viene aumentato per includere più elementi.
 
-4. Ricomposizione e operazioni di base
+    ## Ricomposizione e operazioni di base
 Una volta spostati gli elementi in "b":
-
 Se "b" risulta ordinato, tutti gli elementi vengono spostati indietro in "a" e viene eseguita una rotazione finale (final_rotate_a()) per mettere tutto in ordine.
-
 Altrimenti, viene usata una funzione di "ricostruzione" (rebuild_stack_a()) per reinserire gli elementi in "a" nel corretto ordine, seguita da una rotazione finale.
-
 Le operazioni di base (swap, push, rotate, reverse rotate) sono implementate in logic_operations.c. Queste funzioni agiscono direttamente sugli array che rappresentano gli stack:
-
 swap: scambia i primi due elementi.
-
 push: sposta il primo elemento di uno stack all’inizio dell’altro.
-
 rotate: sposta il primo elemento alla fine dell’array.
-
 reverse_rotate: sposta l’ultimo elemento all’inizio.
-
 C’è anche un file double_logic_operations.c che definisce operazioni "doppie" per agire contemporaneamente su entrambi gli stack (ad esempio, ruotare entrambi gli stack con una sola funzione).
 
-
-
+---
 # Esempio di utilizzo
 Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
 ---
