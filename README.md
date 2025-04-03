@@ -21,7 +21,7 @@
 - [🛠️ Funzioni Principali](#funzioni-principali)
 - [🎬 Esempio di Utilizzo](#esempio-di-utilizzo)
 - [📝 Licenza](#licenza)
-- [📫 Contatti](#contatti)
+- [🧑‍💻 Contatti](#contatti)
 ---
 
 # Descrizione
