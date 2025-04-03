@@ -7,7 +7,7 @@
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Unix-lightgrey)
 ![License](https://img.shields.io/badge/license-42%20Project-informational)
 ![Status](https://img.shields.io/badge/42%20status-Completed-brightgreen)
-![Score](https://img.shields.io/badge/Score-     -brightgreen)
+![Score](https://img.shields.io/badge/Score-95-brightgreen)
 ![Created](https://img.shields.io/badge/Created-Marzo_2025-blue)
 ---
 
