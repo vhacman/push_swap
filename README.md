@@ -125,8 +125,7 @@ L'idea è quella di suddividere lo stack in gruppi (chunk) e spostare gli elemen
 - 🔁 `reverse_rotate`: ultimo → in cima
 - 🔁 `rr`, 🔃 `rrr`, 🔀 `ss`: rotazioni doppie
 ---
-Questo diagramma illustra il flusso logico dell’algoritmo `hybrid_sort`, dalla scelta iniziale fino alla ricostruzione dello stack A:
-
+### 🧭 Diagramma a Blocchi – Hybrid Sort
 ![Hybrid Sort Flowchart](hybrid_sort_flowchart.png)
 ---
 
@@ -197,8 +196,7 @@ Risultato: `[1, 2, 3, 4, 5]`
   - `merge_arrays()`
   - `copy_temp_to_array()`
 
-Questo diagramma illustra il flusso logico dell’algoritmo `merge_sort`
-
+### 🧭 Diagramma a Blocchi – Merge Sort
 ![Merge Sort Flowchart](merge_sort_flowchart.png)
 ---
 ##  Mini Sort
@@ -267,11 +265,6 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 - `rotate_to_position()` → porta il minimo in cima
 - `find_position_of_index()` → trova il minimo
 ---
-Questo diagramma illustra il flusso logico dell’algoritmo `mini_sort`
-
-![Mini Sort Flowchart](mini_sort_flowchart.png)
----
-
 ## Ultra Chunk Sort
 
 L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente **grandi stack** (tipicamente 500 elementi), suddividendoli in **chunk** più piccoli e gestendoli strategicamente.
