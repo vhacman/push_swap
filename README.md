@@ -8,3 +8,7 @@
 ![License](https://img.shields.io/badge/license-42%20Project-informational)
 ![Status](https://img.shields.io/badge/42%20status-Completed-brightgreen)
 ---
+
+
+**Push_swap** è un progetto della 42School che consiste nell'ordinare una lista di numeri interi utilizzando due stack (A e B) e un set limitato di operazioni, il tutto cercando di minimizzare il numero di mosse.
+
