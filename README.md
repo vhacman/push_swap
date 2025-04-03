@@ -45,44 +45,45 @@ Le funzioni implementate per eseguire operazioni di base (swap, push, rotate, re
 ```bash
 push_swap/
 ├── include/
-│   └── push_swap.h                # Header principale del progetto
+│   └── push_swap.h                # Header principale: struct, prototype, define generici
 ├── main/
-│   └── main.c                     # Entry point
+│   └── main.c                     # Entry point: inizializza, seleziona algoritmo, libera stack
 ├── src/
 │   ├── algorithms/
-│   │   ├── hybrid_sort.c          # Ordinamento <500 numeri
-|   |   ├── merge_algorithm.c      # Merge Sort
-│   │   ├── mini_sort_a.c          # Ordinamento ≤5 numeri
-│   │   └── ultra_chunk_sort.c     # Ordinamento ottimizzato per >= 500 numeri
-|   |
+│   │   ├── hybrid_sort.c          # Ordinamento per ≤500 numeri (chunk dinamici, greedy)
+│   │   ├── merge_algorithm.c      # Merge Sort: ordinamento array temporaneo per gli indici
+│   │   ├── mini_sort_a.c          # Ordinamento per 2–5 elementi (rotazioni manuali)
+│   │   └── ultra_chunk_sort.c     # Ordinamento ottimizzato per ≥500 numeri (chunk statici)
+│   │
 │   ├── error_handling/                     
-│   │   ├── controls.c             # 
-│   │   ├── error.c                #
-│   │   ├── free.c                 #
-│   │   └── validate_input.c       # Parsing e validazione
-|   |
+│   │   ├── controls.c             # Controlli extra (es. is_sorted, is_valid, ecc.)
+│   │   ├── error.c                # Gestione errori critici e exit
+│   │   ├── free.c                 # Funzioni per liberare stack, array, costi, ecc.
+│   │   └── validate_input.c       # Parsing input, gestione duplicati, overflow, caratteri non numerici
+│   │
 │   ├── execute_optimal_moves/
-│   │   └── execute_optimal_moves.c
-|   |
+│   │   └── execute_optimal_moves.c  # Rotazioni combinate (rr, rrr), push intelligente
+│   │
 │   ├── libft/
-│   │   ├── includes
-|   |   |        
-│   │   ├── src/
-|   |   └──── ...   # Operazioni su stack reali
-|   | 
+│   │   ├── includes               # Header della libft
+│   │   ├── src/                   # Tutti i file implementativi della libft
+│   │   └──── ...                  # Es. ft_split.c, ft_atoi.c, ft_strlen.c
+│   │ 
 │   ├── utils/
 │   │   └── debug_functions/
-|   |       └── debug.c
+│   │       └── debug.c            # Stampa stato degli stack, indici, informazioni di debug
+│   │
 │   ├── stack_operations/         
 │   │   └── print_operations/
-│   │   |   ├── print_push_print_swap.c      
-|   |   |   ├── print_rotate_print_rrotate.c 
-│   │   |   └── print_stack_double_operations.c
-│   │   |
-│   |   ├── stack_double_operations.c
-│   |   ├── stack_operations.c
-├── Makefile
-├── README.md
+│   │   │   ├── print_push_print_swap.c        # Stampa `sa`, `sb`, `pa`, `pb`
+│   │   │   ├── print_rotate_print_rrotate.c   # Stampa `ra`, `rb`, `rra`, `rrb`
+│   │   │   └── print_stack_double_operations.c# Stampa `ss`, `rr`, `rrr`
+│   │   │
+│   │   ├── stack_double_operations.c # Esecuzione di `ss`, `rr`, `rrr` su stack reali
+│   │   └── stack_operations.c        # Operazioni base `sa`, `ra`, `pb`, `pa`, ecc.
+├── Makefile                          # Compilazione: definisce regole e target (`make`, `clean`, `fclean`, ecc.)
+└── README.md                         # Documentazione generale del progetto
+
 ```
 ---
 
