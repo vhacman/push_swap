@@ -42,25 +42,48 @@ Le funzioni implementate per eseguire operazioni di base (swap, push, rotate, re
 # Obiettivi
 ---
 # Architettura del Progetto
-
-| File                        | Responsabilità                          |
-|-----------------------------|------------------------------------------|
-| `main.c`                    | Inizializzazione e sorting               |
-| `validate_input.c`          | Parsing e validazione degli input        |
-| `assign_indices.c`          | Assegnazione indici ordinati             |
-| `merge_algorithm.c`         | Merge sort su array temporaneo           |
-| `mini_sort_a.c`             | Ordinamento di piccoli input (≤5)        |
-| `hybrid_sort.c`             | Strategia ibrida per input medi(6 -499     |
-| `ultra_chunk_sort.c`        | Strategia ottimizzata per 500+ numeri     |
-| `cost_utils.c`              | Calcolo del costo di ogni possibile mossa|
-| `execute_optimal_moves.c`   | Esecuzione combinata delle mosse         |
-| `stack_operations.c`        | Operazioni su stack reali (`sa`, `pb`, …)|
-| `operations.c`              | Operazioni su array fittizi              |
-| `stack_utils.c`             | Utility per gestione e conversione stack |
-| `stack_check.c`             | Verifica ordinamento finale              |
-| `debug.c`                   | Debugging visuale degli stack            |
-
----
+```bash
+push_swap/
+├── include/
+│   └── push_swap.h                # Header principale del progetto
+├── main/
+│   └── main.c                     # Entry point
+├── src/
+│   ├── algorithms/
+│   │   ├── hybrid_sort.c          # Ordinamento <500 numeri
+|   |   ├── merge_algorithm.c      # Merge Sort
+│   │   ├── mini_sort_a.c          # Ordinamento ≤5 numeri
+│   │   └── ultra_chunk_sort.c     # Ordinamento ottimizzato per >= 500 numeri
+|   |
+│   ├── error_handling/                     
+│   │   ├── controls.c             # 
+│   │   ├── error.c                #
+│   │   ├── free.c                 #
+│   │   └── validate_input.c       # Parsing e validazione
+|   |
+│   ├── execute_optimal_moves/
+│   │   └── execute_optimal_moves.c
+|   |
+│   ├── libft/
+│   │   ├── includes
+|   |   |        
+│   │   ├── src/
+|   |   └──── ...   # Operazioni su stack reali
+|   | 
+│   ├── utils/
+│   │   └── debug_functions/
+|   |       └── debug.c
+│   ├── stack_operations/         
+│   │   └── print_operations/
+│   │   |   ├── print_push_print_swap.c      
+|   |   |   ├── print_rotate_print_rrotate.c 
+│   │   |   └── print_stack_double_operations.c
+│   │   |
+│   |   ├── stack_double_operations.c
+│   |   ├── stack_operations.c
+├── Makefile
+├── README.md
+```
 ---
 
 # Esempio di utilizzo
