@@ -201,9 +201,79 @@ Questo diagramma illustra il flusso logico dell’algoritmo `merge_sort`
 
 ![Merge Sort Flowchart](merge_sort_flowchart.png)
 ---
+##  Mini Sort
 
+L’algoritmo **Mini Sort** è ottimizzato per gestire input molto piccoli (da 2 a 5 elementi). In questi casi, utilizzare algoritmi complessi come il merge sort o il chunking sarebbe inefficiente.
+
+🔹 `mini_sort_a()` applica strategie diverse in base al numero di elementi presenti nello stack A, cercando di minimizzare al massimo il numero di operazioni (`sa`, `ra`, `rra`, `pb`, `pa`).
+
+---
+
+### 🧠 Logica decisionale per stack ≤ 3 elementi
+
+La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a`:
+
+📊 In base alle 5 possibili combinazioni di ordine, esegue le operazioni minime necessarie per ottenere l’ordinamento crescente:
+
+- 🔁 Caso 1: solo i primi due sono fuori ordine → `sa`
+- ⬇️ Caso 2: stack in ordine decrescente → `sa` + `rra`
+- 🔄 Caso 3: il primo è il maggiore → `ra`
+- 🔃 Caso 4: il secondo è il maggiore → `sa` + `ra`
+- 🔁 Caso 5: il terzo è il più piccolo → `rra`
+
+---
+
+### 🔍 Ricerca del valore minimo
+
+`find_position_of_index()`:
+
+📍 Restituisce la posizione del nodo con `min_index` nello stack
+
+✅ Serve a capire se conviene ruotare `ra` o `rra`
+
+---
+
+### 🔁 Rotazione verso la posizione
+
+`rotate_to_position()`:
+
+- 🔃 Ruota in avanti (`ra`) se è nella prima metà
+- 🔁 Ruota indietro (`rra`) se è nella seconda
+
+---
+
+### ⚙️ Ordinamento per 4 o 5 elementi
+
+1. 🔄 Ruota fino a portare il minimo in cima
+2. 📤 Sposta in `b` con `pb`
+3. 🔁 Ripeti fino a lasciare solo 3 in `a`
+4. 🧩 Ordina ricorsivamente i 3 elementi
+5. 📥 Riporta da `b` ad `a` con `pa`
+
+---
+
+### 🧭 Diagramma a Blocchi – Mini Sort
+
+![Mini Sort Flowchart](./docs/mini_sort_flowchart.png)
+
+---
+
+### 📁 Moduli coinvolti
+
+📂 `mini_sort_a.c`
+
+- `mini_sort_a()` → funzione principale
+- `handle_three_elements()` → gestione 3 elementi
+- `rotate_to_position()` → porta il minimo in cima
+- `find_position_of_index()` → trova il minimo
+---
+Questo diagramma illustra il flusso logico dell’algoritmo `mini_sort`
+
+![Mini Sort Flowchart](mini_sort_flowchart.png)
 # Esempio di utilizzo
+
 Supponiamo di avere in ingresso la sequenza "2 1 3 6 5 8". Il programma analizza l’input, assegna ad ogni numero un indice basato sull’ordine crescente e, applicando le operazioni predefinite (ad esempio, eseguendo operazioni come sa, pb, ra, ecc.), ordina lo stack in maniera ottimizzata. Durante l’esecuzione, operazioni come rebuild_stack_a.c aiutano a ricostruire la pila finale da stack b, garantendo che l’ordinamento sia corretto .
+
 ---
 
 ## Build
