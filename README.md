@@ -10,7 +10,6 @@
 [![Created](https://img.shields.io/badge/Created-Marzo_2025-blue?style=for-the-badge)]()
 
 ---
-
 ## 📚 Indice
 - [📖 Descrizione](#descrizione)
 - [📁 Architettura del Progetto](#architettura-del-progetto)
