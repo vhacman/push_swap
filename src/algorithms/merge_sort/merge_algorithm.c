@@ -84,18 +84,20 @@ static void	copy_temp_to_array(int *array, int *arr_temp,
  * efficiently combines these sorted segments, maintaining the overall order.
  * This approach, with its O(n log n) complexity, is widely used due to its
  * predictable performance even on large datasets.*/
-static void	merge_sort_recursive(int *array, int *arr_temp,
-								t_range_limits limits)
+
+void	merge_sort_recursive(int *array, int *arr_temp,
+		t_range_limits limits)
 {
-	int				mid;
-	t_range_limits	left;
-	t_range_limits	right;
+	int						mid;
+	t_range_limits			left;
+	t_range_limits			right;
 
 	if (limits.left < limits.right)
 	{
 		mid = limits.left + (limits.right - limits.left) / 2;
-		left = (t_range_limits){limits.left, 0, mid};
-		right = (t_range_limits){mid + 1, 0, limits.right};
+		left = (t_range_limits){.left = limits.left, .mid = 0, .right = mid};
+		right = (t_range_limits){.left = mid + 1, .mid = 0,
+			.right = limits.right};
 		merge_sort_recursive(array, arr_temp, left);
 		merge_sort_recursive(array, arr_temp, right);
 		limits.mid = mid;

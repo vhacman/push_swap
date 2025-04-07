@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:13:57 by vhacman           #+#    #+#             */
-/*   Updated: 2025/04/02 16:21:09 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/07 15:24:22 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void				hybrid_sort(t_stack_node **a, t_stack_node **b);
 void				merge_sort(int *array, int size);
 void				assign_indices(t_stack_node *stack, int *sorted_array,
 						int size);
+void				merge_sort_recursive(int *array, int *arr_temp,
+						t_range_limits limits);
 
 /* ===================== CHUNK SORTING ===================== */
 void				move_chunks(t_stack_node **a, t_stack_node **b,
