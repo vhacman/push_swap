@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 00:24:44 by vhacman           #+#    #+#             */
-/*   Updated: 2025/04/01 00:37:16 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:37:35 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  *
  * This function helps minimize the total moves by choosing the shorter 
  * rotation path.*/
-void	set_rotations(int pos, int size, int *direction, int *rotations)
+static void	set_rotations(int pos, int size, int *direction, int *rotations)
 {
 	if (pos > size / 2)
 	{
@@ -44,7 +44,7 @@ void	set_rotations(int pos, int size, int *direction, int *rotations)
  * Then, it uses set_rotations() to determine the rotation count
  * and direction for each stack. The total cost is the sum of the 
  * rotations required.*/
-void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
+static void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
 								t_stack_node *node, t_cost *cost)
 {
 	int	size_a;
@@ -74,20 +74,21 @@ void	calculate_move_cost(t_stack_node **stack_a, t_stack_node **stack_b,
  * choosing the node with the lowest cost. It is a critical step in
  * optimizing the overall sorting process in push_swap.
  */
-void	update_if_better_target(t_stack_node **a, t_stack_node **b,
-		t_chunk_info chunk, t_target_info *target)
+static void	update_if_better_target(t_stack_node **stack_a,
+		t_stack_node **stack_b, t_chunk_info chunk,
+		t_target_info *target)
 {
 	t_stack_node	*curr;
 	t_cost			cost;
 	int				penalized_moves;
 
-	curr = *a;
+	curr = *stack_a;
 	while (curr)
 	{
 		if (curr->index >= chunk.limit - chunk.size
 			&& curr->index < chunk.limit)
 		{
-			calculate_move_cost(a, b, curr, &cost);
+			calculate_move_cost(stack_a, stack_b, curr, &cost);
 			penalized_moves = cost.total_moves;
 			if (penalized_moves < target->cost.total_moves)
 			{
@@ -120,20 +121,21 @@ void	update_if_better_target(t_stack_node **a, t_stack_node **b,
  * cost to determine the optimal move.
  * By adjusting the chunk_limit dynamically, the algorithm efficiently 
  * handles varying distributions of elements in stack 'a'. */
-void	move_chunks(t_stack_node **a, t_stack_node **b, t_chunk_info chunk)
+void	move_chunks(t_stack_node **stack_a, t_stack_node **stack_b,
+						t_chunk_info chunk)
 {
 	t_target_info	target;
 
-	while (*a)
+	while (*stack_a)
 	{
 		init_target_info(&target);
-		update_if_better_target(a, b, chunk, &target);
+		update_if_better_target(stack_a, stack_b, chunk, &target);
 		if (!target.node)
 		{
 			chunk.limit += chunk.size;
 			continue ;
 		}
-		execute_combo_move(a, b, target.cost);
+		execute_combo_move(stack_a, stack_b, target.cost);
 	}
 }
 
@@ -157,29 +159,29 @@ void	move_chunks(t_stack_node **a, t_stack_node **b, t_chunk_info chunk)
  * hybrid_sort is applied only when the total number of elements is between 
  * 6 and 499. For 5 or fewer elements, mini_sort_a is used, and for 500 or 
  * more elements, ultra_chunk_sort is employed.*/
-void	hybrid_sort(t_stack_node **a, t_stack_node **b)
+void	hybrid_sort(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	int				size;
 	t_chunk_info	chunk;
 
-	if (is_sorted(*a))
+	if (is_sorted(*stack_a))
 		return ;
-	size = stack_size(*a);
+	size = stack_size(*stack_a);
 	if (size >= 6 && size <= 100)
 		chunk.size = size / 5.5;
 	else
 		chunk.size = 12;
 	chunk.limit = chunk.size;
-	move_chunks(a, b, chunk);
-	if (is_sorted(*b))
+	move_chunks(stack_a, stack_b, chunk);
+	if (is_sorted(*stack_b))
 	{
-		while (*b)
-			pa(b, a);
-		final_rotate_a(a);
+		while (*stack_b)
+			pa(stack_b, stack_a);
+		final_rotate_a(stack_a);
 	}
 	else
 	{
-		rebuild_stack_a(a, b);
-		final_rotate_a(a);
+		rebuild_stack_a(stack_a, stack_b);
+		final_rotate_a(stack_a);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:13:57 by vhacman           #+#    #+#             */
-/*   Updated: 2025/04/07 15:24:22 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:38:58 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ void				free_split(char **token);
 /* ===================== SORTING ALGORITHMS ===================== */
 void				perform_sorting(t_stack_node **stack_a,
 						t_stack_node **stack_b, int size);
-void				mini_sort_a(t_stack_node **a, t_stack_node **b);
-void				ultra_chunk_sort(t_stack_node **a, t_stack_node **b,
-						int total_size);
-void				hybrid_sort(t_stack_node **a, t_stack_node **b);
+void				mini_sort_a(t_stack_node **stack_a,
+						t_stack_node **stack_b);
+void				ultra_chunk_sort(t_stack_node **stack_a,
+						t_stack_node **stack_b, int total_size);
+void				hybrid_sort(t_stack_node **stack_a,
+						t_stack_node **stack_b);
 
 /* ===================== INDEX UTILS & SORT ===================== */
 void				merge_sort(int *array, int size);
@@ -97,20 +99,15 @@ void				merge_sort_recursive(int *array, int *arr_temp,
 						t_range_limits limits);
 
 /* ===================== CHUNK SORTING ===================== */
-void				move_chunks(t_stack_node **a, t_stack_node **b,
-						t_chunk_info chunk);
+void				move_chunks(t_stack_node **stack_a,
+						t_stack_node **stack_b, t_chunk_info chunk);
 void				rebuild_stack_a(t_stack_node **a, t_stack_node **b);
 void				smart_pb(t_stack_node **a, t_stack_node **b);
 
 /* ===================== COST CALCULATION UTILS ===================== */
 void				init_target_info(t_target_info *info);
-void				set_rotations(int pos, int size, int *direction,
-						int *rotations);
-void				calculate_move_cost(t_stack_node **a, t_stack_node **b,
-						t_stack_node *node, t_cost *cost);
 int					distance_to_top(t_stack_node *stack, t_stack_node *target);
 int					find_target_position_b(t_stack_node *stack_b, int index);
-int					find_position_of_index(t_stack_node *stack, int index);
 
 /* ===================== ARRAY-BASED OPERATIONS ===================== */
 void				swap(int *array, int size);

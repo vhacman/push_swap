@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 22:03:32 by vhacman           #+#    #+#             */
-/*   Updated: 2025/03/31 22:50:40 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:32:25 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,25 @@ static int	find_position(t_stack_node *stack, int index)
  * the algorithm ensures that the highest remaining elements are placed
  * in order, effectively building the final sorted stack from the largest
  * values downward. */
-static void	move_max_to_a(t_stack_node **a, t_stack_node **b)
+static void	move_max_to_a(t_stack_node **stack_a,
+							t_stack_node **stack_b)
 {
 	int	max_index;
 	int	position;
 	int	stack_b_size;
 
-	while (*b)
+	while (*stack_b)
 	{
-		max_index = find_max_index(*b);
-		position = find_position(*b, max_index);
-		stack_b_size = stack_size(*b);
+		max_index = find_max_index(*stack_b);
+		position = find_position(*stack_b, max_index);
+		stack_b_size = stack_size(*stack_b);
 		if (position <= stack_b_size / 2)
-			while ((*b)->index != max_index)
-				rb(b);
+			while ((*stack_b)->index != max_index)
+				rb(stack_b);
 		else
-			while ((*b)->index != max_index)
-				rrb(b);
-		pa(b, a);
+			while ((*stack_b)->index != max_index)
+				rrb(stack_b);
+		pa(stack_b, stack_a);
 	}
 }
 
@@ -122,25 +123,25 @@ static void	move_max_to_a(t_stack_node **a, t_stack_node **b)
  * rotation on 'b' (rb) for lower-half indices further organizes the 
  * auxiliary stack, making it easier to merge the chunks back in order.
  */
-static void	push_chunks_to_b(t_stack_node **a, t_stack_node **b,
-							int chunk_size)
+static void	push_chunks_to_b(t_stack_node **stack_a,
+								t_stack_node **stack_b, int chunk_size)
 {
 	int				current_chunk_limit;
 	t_stack_node	*current_node;
 
 	current_chunk_limit = chunk_size;
-	while (*a)
+	while (*stack_a)
 	{
-		current_node = *a;
+		current_node = *stack_a;
 		if (current_node->index < current_chunk_limit)
 		{
-			pb(a, b);
+			pb(stack_a, stack_b);
 			if (current_node->index < current_chunk_limit - (chunk_size / 2))
-				rb(b);
+				rb(stack_b);
 		}
 		else
-			ra(a);
-		if (stack_size(*b) >= current_chunk_limit)
+			ra(stack_a);
+		if (stack_size(*stack_b) >= current_chunk_limit)
 			current_chunk_limit += chunk_size;
 	}
 }
@@ -160,11 +161,12 @@ static void	push_chunks_to_b(t_stack_node **a, t_stack_node **b,
  * divisor (here 9) is a tunable parameter that can affect performance;
  * it is chosen based on experimental observations to optimize move count
  * in this particular implementation.*/
-void	ultra_chunk_sort(t_stack_node **a, t_stack_node **b, int total_size)
+void	ultra_chunk_sort(t_stack_node **stack_a, t_stack_node **stack_b,
+		int total_size)
 {
 	int	chunk_size;
 
 	chunk_size = total_size / 9;
-	push_chunks_to_b(a, b, chunk_size);
-	move_max_to_a(a, b);
+	push_chunks_to_b(stack_a, stack_b, chunk_size);
+	move_max_to_a(stack_a, stack_b);
 }
