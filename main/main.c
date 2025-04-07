@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:08:33 by vhacman           #+#    #+#             */
-/*   Updated: 2025/04/03 10:59:18 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/07 11:24:17 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	initialize_stack(int ac, char **av, t_stack_node **stack_a)
 	}
 	temp_array = convert_stack_to_array(*stack_a, size);
 	if (!temp_array)
-		return (1);
+		return (0);
 	merge_sort(temp_array, size);
 	assign_indices(*stack_a, temp_array, size);
 	free(temp_array);
