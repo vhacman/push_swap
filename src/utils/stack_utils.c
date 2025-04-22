@@ -6,7 +6,7 @@
 /*   By: vhacman <vhacman@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 21:22:25 by vhacman           #+#    #+#             */
-/*   Updated: 2025/04/22 10:49:35 by vhacman          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:52:13 by vhacman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,24 @@ int	*convert_stack_to_array(t_stack_node *stack, int stack_size)
 	return (array);
 }
 
-// /* Allocates and initializes a new stack node.
-//  *
-//  * This function allocates memory for a new t_stack_node, sets its value
-//  * to the given integer, initializes its index to -1 (a placeholder because 
-//  * we don't know the index yet), and sets its next
-//  * pointer to NULL. This node is ready to be added to a stack.*/
-// t_stack_node	*create_stack_node(int value)
-// {
-// 	t_stack_node	*node;
+/* Allocates and initializes a new stack node.
+ *
+ * This function allocates memory for a new t_stack_node, sets its value
+ * to the given integer, initializes its index to -1 (a placeholder because 
+ * we don't know the index yet), and sets its next
+ * pointer to NULL. This node is ready to be added to a stack.*/
+t_stack_node	*create_stack_node(int value)
+{
+	t_stack_node	*node;
 
-// 	node = malloc(sizeof(t_stack_node));
-// 	if (!node)
-// 		return (NULL);
-// 	node->value = value;
-// 	node->index = -1;
-// 	node->next = NULL;
-// 	return (node);
-// }
+	node = malloc(sizeof(t_stack_node));
+	if (!node)
+		return (NULL);
+	node->value = value;
+	node->index = -1;
+	node->next = NULL;
+	return (node);
+}
 
 /* Adds a new node with the given value to the end of the stack.
  *
@@ -115,11 +115,9 @@ void	create_stack(t_stack_node **stack, int value)
 	t_stack_node	*new_node;
 	t_stack_node	*temp;
 
-	new_node = malloc(sizeof(t_stack_node));
+	new_node = create_stack_node(value);
 	if (!new_node)
 		exit_error();
-	new_node->value = value;
-	new_node->next = NULL;
 	if (!*stack)
 	{
 		*stack = new_node;
