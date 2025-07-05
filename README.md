@@ -1,29 +1,3 @@
----
-
-## 🤝 Contribuisci in modo rispettoso
-
-Se trovi utile questo progetto, ti invito a non clonare direttamente la repository.
-
-### ✨ Perché fare una fork?
-
-Fare una **fork**:
-- ti permette di avere una copia personale su cui lavorare liberamente;
-- rende trasparente il tuo interesse per il progetto;
-- mi aiuta a costruire un GitHub più professionale e tracciabile, mostrando quante persone hanno interagito realmente con il mio lavoro.
-
-> 🚀 In questo modo posso far crescere il mio profilo e migliorare come sviluppatrice.
-
-### ✅ Come procedere
-
-1. Clicca in alto a destra su **Fork**
-2. Clona la tua copia con:
-
-```bash
-git clone https://github.com/<il-tuo-username>/<nome-repo>.git
-
-```
----
-
 # 🚀 Push-Swap
 
 [![42 Project](https://img.shields.io/badge/42%20Project-Pipex-blue?style=for-the-badge&logo=42)](https://github.com/vhacman/push_swap)
@@ -122,29 +96,29 @@ L'idea è quella di suddividere lo stack in gruppi (chunk) e spostare gli elemen
 
 ### 📊 Calcolo dei costi e scelta del movimento migliore
 
-- 📍 `distance_to_top()` → Distanza dalla cima dello stack
-- 🎯 `find_target_position_b()` → Posizione ideale nello stack B
-- 🔁 `set_rotations()` → Direzione e numero di rotazioni (ra/rra, rb/rrb)
-- 🔎 `calculate_move_cost()` → Calcola il costo totale delle mosse
+-  `distance_to_top()` → Distanza dalla cima dello stack
+-  `find_target_position_b()` → Posizione ideale nello stack B
+-  `set_rotations()` → Direzione e numero di rotazioni (ra/rra, rb/rrb)
+-  `calculate_move_cost()` → Calcola il costo totale delle mosse
 
 ### 🎯 Aggiornamento del target e spostamento ottimale
 
-- 🔄 `update_if_better_target()` → Cerca il miglior candidato nel chunk corrente
-- 📤 `execute_combo_move()` → Esegue rotazioni combinate e `pb`
-- 🔁 `move_chunks()` → Cicla fino a svuotare `stack_a`, aggiornando i chunk dinamicamente
+-  `update_if_better_target()` → Cerca il miglior candidato nel chunk corrente
+-  `execute_combo_move()` → Esegue rotazioni combinate e `pb`
+-  `move_chunks()` → Cicla fino a svuotare `stack_a`, aggiornando i chunk dinamicamente
 
 ### 🧱 Ricomposizione e operazioni di base
 
-- ✅ Se `stack_b` è ordinato → `pa` + `final_rotate_a()`
-- 🔁 Altrimenti → `rebuild_stack_a()` + `final_rotate_a()`
+-  Se `stack_b` è ordinato → `pa` + `final_rotate_a()`
+-  Altrimenti → `rebuild_stack_a()` + `final_rotate_a()`
 
 ### ⚙️ Operazioni fondamentali
 
-- 🔄 `swap`: scambia i primi due elementi
-- 📤 `push`: sposta il primo elemento tra gli stack
-- 🔃 `rotate`: primo → fondo
-- 🔁 `reverse_rotate`: ultimo → in cima
-- 🔁 `rr`, 🔃 `rrr`, 🔀 `ss`: rotazioni doppie
+-  `swap`: scambia i primi due elementi
+-  `push`: sposta il primo elemento tra gli stack
+-  `rotate`: primo → fondo
+-  `reverse_rotate`: ultimo → in cima
+-  `rr`,  `rrr`,  `ss`: rotazioni doppie
 ---
 ### 🧭 Diagramma a Blocchi – Hybrid Sort
 ![Hybrid Sort Flowchart](hybrid_sort_flowchart.png)
@@ -158,31 +132,31 @@ L'algoritmo **Merge Sort** viene utilizzato in `push_swap` per **ordinare un arr
 ---
 ### 🔁 Suddivisione ricorsiva e fusione
 
-- ✂️ Divide l’array in due metà
-- 🔁 Applica ricorsione su entrambe
-- 🔗 `merge_arrays()` → fonde due sottosequenze ordinate
-- 🧾 `copy_temp_to_array()` → aggiorna il segmento ordinato nell’array principale
+- ✂ Divide l’array in due metà
+-  Applica ricorsione su entrambe
+-  `merge_arrays()` → fonde due sottosequenze ordinate
+- `copy_temp_to_array()` → aggiorna il segmento ordinato nell’array principale
 
 ---
 ### 🔀 Fusione degli array ordinati
 
-- 📍 Confronta due sottosequenze ordinate
-- 🧩 Inserisce i valori in `arr_temp`
-- 📦 Copia i rimanenti una volta terminato uno dei segmenti
+-  Confronta due sottosequenze ordinate
+-  Inserisce i valori in `arr_temp`
+-  Copia i rimanenti una volta terminato uno dei segmenti
 
 ---
 ### 📥 Copia nel vero array
 
-- 📤 Copia ordinata da `arr_temp` a `array`
-- 🧼 Modifica solo il segmento in questione
+-  Copia ordinata da `arr_temp` a `array`
+-  Modifica solo il segmento in questione
 
 ---
 ### 🚪 Ingresso nell’algoritmo
 
-- 🧠 `merge_sort()` è l’entry point
-- 🔧 Alloca `arr_temp`
-- 📞 Avvia la ricorsione
-- 🗑 Libera la memoria alla fine
+-  `merge_sort()` è l’entry point
+-  Alloca `arr_temp`
+-  Avvia la ricorsione
+-  Libera la memoria alla fine
 
 ---
 ### 📌 Esempio pratico
@@ -197,8 +171,8 @@ Risultato: `[1, 2, 3, 4, 5]`
 ---
 ### ⏱️ Complessità
 
-- ⏳ Tempo: O(n log n)
-- 📦 Spazio: O(n)
+-  Tempo: O(n log n)
+-  Spazio: O(n)
 
 ---
 ### 📁 Moduli coinvolti
@@ -226,37 +200,37 @@ La funzione `handle_three_elements()` analizza i primi tre valori nello stack `a
 
 📊 In base alle 5 possibili combinazioni di ordine, esegue le operazioni minime necessarie per ottenere l’ordinamento crescente:
 
-- 🔁 Caso 1: solo i primi due sono fuori ordine → `sa`
-- ⬇️ Caso 2: stack in ordine decrescente → `sa` + `rra`
-- 🔄 Caso 3: il primo è il maggiore → `ra`
-- 🔃 Caso 4: il secondo è il maggiore → `sa` + `ra`
-- 🔁 Caso 5: il terzo è il più piccolo → `rra`
+-  Caso 1: solo i primi due sono fuori ordine → `sa`
+-  Caso 2: stack in ordine decrescente → `sa` + `rra`
+-  Caso 3: il primo è il maggiore → `ra`
+-  Caso 4: il secondo è il maggiore → `sa` + `ra`
+-  Caso 5: il terzo è il più piccolo → `rra`
 
 ---
 ### 🔍 Ricerca del valore minimo
 
 `find_position_of_index()`:
 
-📍 Restituisce la posizione del nodo con `min_index` nello stack
+ Restituisce la posizione del nodo con `min_index` nello stack
 
-✅ Serve a capire se conviene ruotare `ra` o `rra`
+ Serve a capire se conviene ruotare `ra` o `rra`
 
 ---
 ### 🔁 Rotazione verso la posizione
 
 `rotate_to_position()`:
 
-- 🔃 Ruota in avanti (`ra`) se è nella prima metà
-- 🔁 Ruota indietro (`rra`) se è nella seconda
+-  Ruota in avanti (`ra`) se è nella prima metà
+-  Ruota indietro (`rra`) se è nella seconda
 
 ---
 ### ⚙️ Ordinamento per 4 o 5 elementi
 
-1. 🔄 Ruota fino a portare il minimo in cima
-2. 📤 Sposta in `b` con `pb`
-3. 🔁 Ripeti fino a lasciare solo 3 in `a`
-4. 🧩 Ordina ricorsivamente i 3 elementi
-5. 📥 Riporta da `b` ad `a` con `pa`
+1.  Ruota fino a portare il minimo in cima
+2.  Sposta in `b` con `pb`
+3.  Ripeti fino a lasciare solo 3 in `a`
+4.  Ordina ricorsivamente i 3 elementi
+5.  Riporta da `b` ad `a` con `pa`
 
 ---
 ### 🧭 Diagramma a Blocchi – Mini Sort
@@ -282,13 +256,13 @@ L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente
 ---
 ### 🧠 Strategia generale
 
-1. 🔢 **Chunking**: lo stack `a` viene suddiviso in gruppi di valori in base all’indice.
-2. 📤 `push_chunks_to_b()`:
+1.  **Chunking**: lo stack `a` viene suddiviso in gruppi di valori in base all’indice.
+2.  `push_chunks_to_b()`:
    - Se l’indice è sotto la soglia (`current_chunk_limit`) → `pb`
    - Se è nella metà inferiore del chunk → `rb` (rotazione `b` per tenerlo basso)
    - Altrimenti → `ra` (rotazione `a` per cercare altri candidati)
    - Ogni volta che `b` supera la soglia → aumenta `chunk_limit`
-3. 📥 `move_max_to_a()`:
+      `move_max_to_a()`:
    - Trova il valore massimo in `b` → ruota `b` in modo ottimale (`rb` / `rrb`)
    - Sposta il massimo in `a` con `pa`
    - Ripeti finché `b` è vuoto
@@ -296,7 +270,7 @@ L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente
 ---
 ### 🔢 Chunk size dinamico
 
-📏 Calcolato come `total_size / 9`, testato sperimentalmente per massimizzare efficienza e minimizzare mosse.
+ Calcolato come `total_size / 9`, testato sperimentalmente per massimizzare efficienza e minimizzare mosse.
 
 ---
 ### 🧭 Diagramma a Blocchi – Ultra Chunk Sort
@@ -306,7 +280,7 @@ L’algoritmo **Ultra Chunk Sort** è progettato per ordinare in modo efficiente
 ---
 ### 📁 Moduli coinvolti
 
-📂 `ultra_chunk_sort.c`
+ `ultra_chunk_sort.c`
 
 - `ultra_chunk_sort()` → funzione principale
 - `push_chunks_to_b()` → suddivisione in blocchi e push in `b`
@@ -344,4 +318,29 @@ make valgrind   # check su memory leak
 [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/profile.php?id=100090802467237)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/vgabrielah_/)
 
+---
+---
+
+## 🤝 Contribuisci in modo rispettoso
+
+Se trovi utile questo progetto, ti invito a non clonare direttamente la repository.
+
+### ✨ Perché fare una fork?
+
+Fare una **fork**:
+- ti permette di avere una copia personale su cui lavorare liberamente;
+- rende trasparente il tuo interesse per il progetto;
+- mi aiuta a costruire un GitHub più professionale e tracciabile, mostrando quante persone hanno interagito realmente con il mio lavoro.
+
+ In questo modo posso far crescere il mio profilo e migliorare come sviluppatrice.
+
+### ✅ Come procedere
+
+1. Clicca in alto a destra su **Fork**
+2. Clona la tua copia con:
+
+```bash
+git clone https://github.com/<il-tuo-username>/<nome-repo>.git
+
+```
 ---
