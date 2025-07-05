@@ -1,9 +1,9 @@
 # 🚀 Push-Swap
 
-[![42 Project](https://img.shields.io/badge/42%20Project-Pipex-blue?style=for-the-badge&logo=42)](https://github.com/vhacman/push_swap)
+![Score](https://img.shields.io/badge/Score-90/100-brightgreen?style=for-the-badge)
+[![42 Project](https://img.shields.io/badge/42%20Project-Push-swap-blue?style=for-the-badge&logo=42)](https://github.com/vhacman/push_swap)
 [![C Language](https://img.shields.io/badge/Made%20with-C-00599C?style=for-the-badge&logo=c)](https://en.wikipedia.org/wiki/C_(programming_language))
 [![Norminette Approved](https://img.shields.io/badge/Norminette-OK-brightgreen?style=for-the-badge)](https://github.com/42School/norminette)
-[![Memory Leak Free](https://img.shields.io/badge/Leaks-Free-success?style=for-the-badge)](https://valgrind.org/)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Unix-violet?style=for-the-badge)]()
 [![License](https://img.shields.io/badge/license-42%20Project-informational?style=for-the-badge)]()
 [![Status](https://img.shields.io/badge/42%20status-Completed-brightgreen?style=for-the-badge)]()
